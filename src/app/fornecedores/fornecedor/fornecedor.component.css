@@ -1,0 +1,17 @@
+.col-cep{
+  width: 130px;
+}
+.col-uf{
+  width: 40px;
+}
+.col-telefone{
+  width: 100px;
+}
+.col-nomeFantasia{
+  width: 150px;
+}
+
+.button-acoes{
+  background-color: #85209f;
+  border: #85209f;
+}

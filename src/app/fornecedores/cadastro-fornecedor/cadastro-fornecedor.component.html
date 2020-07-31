@@ -1,0 +1,124 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Fornecedor</h1>
+      </div>
+
+      <div class="ui-g-6 ui-fluid">
+        <label>Nome Fantasia</label>
+        <input pInputText type="text" placeholder="Informe o nome fantasia" name="nomeFantasia"
+        [(ngModel)]="fornecedor.nomeFantasia" #nomeFantasia="ngModel" required>
+
+        <app-message [control]="nomeFantasia" error="required" text="Informe o nome fantasia"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Razão Social</label>
+        <input pInputText type="text" placeholder="Informe a razão social" name="razaoSocial"
+        [(ngModel)]="fornecedor.razaoSocial" #razaoSocial="ngModel" required>
+
+        <app-message [control]="razaoSocial" error="required" text="Informe a razão social"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>CNPJ</label>
+        <p-inputMask mask="99-999-999/9999-99" type="text" placeholder="Informe o cnpj" name="cnpj" 
+        [(ngModel)]="fornecedor.cnpj" #cnpj="ngModel" required></p-inputMask>
+
+        <app-message [control]="cnpj" error="required" text="Informe o cnpj"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Inscrição Estadual</label>
+        <p-inputMask mask="999-999-999-999" placeholder="Informe a inscrição estadual" name="inscricaoEstadual"
+        [(ngModel)]="fornecedor.inscricaoEstadual" #inscricaoEstadual="ngModel" required></p-inputMask>
+
+        <app-message [control]="inscricaoEstadual" error="required" text="Informe a inscrição estadual"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Logradouro</label>
+        <input pInputText type="text" placeholder="Informe o logradouro" name="logradouro"
+        [(ngModel)]="fornecedor.logradouro" #logradouro="ngModel" required>
+
+        <app-message [control]="logradouro" error="required" text="Informe o logradouro"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Número</label>
+        <input pInputText type="text" placeholder="Informe o número" name="numero"
+        [(ngModel)]="fornecedor.numero" #numero="ngModel" required>
+
+        <app-message [control]="numero" error="required" text="Informe o número"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Bairro</label>
+        <input pInputText type="text" placeholder="Informe o bairro" name="bairro"
+        [(ngModel)]="fornecedor.bairro" #bairro="ngModel" required>
+
+        <app-message [control]="numero" error="required" text="Informe o número"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>CEP</label>
+        <p-inputMask mask="99999-999" placeholder="Informe um cep" name="cep"
+        [(ngModel)]="fornecedor.cep" #cep="ngModel" required></p-inputMask>
+
+        <app-message [control]="cep" error="required" text="Informe o cep"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Cidade</label>
+        <input pInputText type="text" placeholder="Informe a cidade" 
+        name="cidade" [(ngModel)]="fornecedor.cidade" #cidade="ngModel" required>
+
+        <app-message [control]="cidade" error="required" text="Informe a cidade"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>UF</label>
+        <input pInputText type="text" placeholder="Informe o estado"
+        name="estado" [(ngModel)]="fornecedor.estado" #estado="ngModel" required>
+
+        <app-message [control]="estado" error="required" text="Informe o estado"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Telefone</label>
+        <p-inputMask mask="(99)9999-9999" placeholder="Informe um telefone" name="telefone"
+        [(ngModel)]="fornecedor.telefone" #telefone="ngModel" required></p-inputMask>
+
+        <app-message [control]="telefone" error="required" text="Informe um telefone"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Telefone 2</label>
+        <p-inputMask mask="(99)9999-9999" placeholder="Informe um telefone" name="telefone2"
+        [(ngModel)]="fornecedor.telefone2"></p-inputMask>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Celular</label>
+        <p-inputMask mask="(99)99999-9999" placeholder="Informe um telefone" name="telefone3"
+        [(ngModel)]="fornecedor.telefone3"></p-inputMask>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Telefone Fax</label>
+        <input pInputText type="text" placeholder="Informe um número" name="telefoneFax"
+        [(ngModel)]="fornecedor.telefoneFax">
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Email</label>
+        <input pInputText type="email" placeholder="Informe um email" name="email"
+        [(ngModel)]="fornecedor.email" #email="ngModel" required>
+
+        <app-message [control]="email" error="required" text="Informe um email"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Status</label>
+        <p-dropdown [options]="status" name="ativo"
+        [(ngModel)]="fornecedor.ativo" #ativo="ngModel" required></p-dropdown>
+
+        <app-message [control]="ativo" error="required" text="Selecione uma opção"></app-message>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
+        <a [routerLink]="['/fornecedores']">Voltar para pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

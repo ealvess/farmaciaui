@@ -1,0 +1,70 @@
+<div class="container">
+  
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Tipos de Medicamentos</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Medicamento</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="tiposDeMedicamentos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+      [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th>NOME</th>
+            <th class="col-apresentacao-header">CATEGORIA</th>
+            <th class="col-data-header">APRESENTAÇÃO</th>
+            <th class="col-data-header">QTD MÍNIMA</th>
+            <th class="col-quantidade-header">LOCALIZAÇÃO</th>
+            <th class="col-status-header">STATUS</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-med>
+          <tr>
+            <td class="col-codigo-content">{{med.codigo}}</td>
+            <td>{{med.nome}}</td>
+            <td class="col-apresentacao-content">{{med.categoria.nome}}</td>
+            <td class="col-data-content">{{med.unidadeDeMedida}}</td>
+            <td class="col-data-content">{{med.quantidadeMinima}}</td>
+            <td class="col-quantidade-content">{{med.localizacao}}</td>
+            <td class="col-status-content">
+              <a href="javascript:;"
+                [pTooltip]="med.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(med)">
+                {{ med.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 5px;" pTooltip="Editar" class="button-acoes"
+              [routerLink]="['/tiposmedicamentos', med.codigo]"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" class="button-acoes" (click)="confirmarExclusao(med)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum medicamento encontrado
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton label="Novo Tipo de Medicamento" [routerLink]="['/tiposmedicamentos/novo']" class="ui-button-success"></button>
+      <button pButton label="Voltar para entrada de medicamentos" style="margin: 5px;" [routerLink]="['/entradamedicamentos']" class="ui-button-success"></button>
+    </div>
+  </div>
+</div>

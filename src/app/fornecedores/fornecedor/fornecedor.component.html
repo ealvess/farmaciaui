@@ -1,0 +1,73 @@
+<div class="container">
+
+
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Fornecedores</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <Label>Nome</Label>
+        <input type="text" pInputText name="nome" [(ngModel)]="filtro.nome" />
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="fornecedores" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-nomeFantasia">EMPRESA</th>
+            <th class="col-cep">CNPJ</th>
+            <th class="col-telefone">TELEFONE</th>
+            <th class="col-telefone">TELEFONE 2</th>
+            <th class="col-telefone">TELEFONE 3</th>
+            <th>EMAIL</th>
+            <th class="col-status-header">STATUS</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-forn>
+          <tr>
+            <td>{{forn.nomeFantasia}}</td>
+            <td>{{forn.cnpj}}</td>
+            <td>{{forn.telefone}}</td>
+            <td>{{forn.telefone2}}</td>
+            <td>{{forn.telefone3}}</td>
+            <td>{{forn.email}}</td>
+            <td class="col-status-content">
+              <a href="javascript:;"
+                [pTooltip]="forn.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(forn)">
+                {{ forn.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 5px;" pTooltip="Editar"
+                [routerLink]="['/fornecedores', forn.codigo]" class="button-acoes"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" (click)="confirmarExclusao(forn)" class="button-acoes"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum fornecedor encontrado
+        </ng-template>
+      </p-table>
+
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton [routerLink]="['/fornecedores/novo']" label="Novo Fornecedor" class="ui-button-success"
+        style="margin: 5px;"></button>
+    </div>
+  </div>
+</div>

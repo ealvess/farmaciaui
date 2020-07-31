@@ -1,0 +1,65 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Nova' }} Entrada de Correlato</h1>
+      </div>
+
+      <div class="ui-g-6 ui-fluid">
+        <label>Data Entrada</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="dataEntrada" [(ngModel)]="entradaCorrelato.dataEntrada" #dataEntrada="ngModel" required></p-calendar>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Nome do Fornecedor</label>
+        <p-dropdown [options]="fornecedores" [filter]="true" placeholder="Selecione" 
+        name="fornecedor" [(ngModel)]="entradaCorrelato.fornecedor.codigo" #fornecedor="ngModel" required></p-dropdown>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Nota Fiscal</label>
+        <input pInputText type="text" placeholder="Informe o número da nota fiscal" name="numeroNotaFiscal"
+        [(ngModel)]="entradaCorrelato.numeroNotaFiscal" #numeroNotaFiscal="ngModel" required>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Nome do Correlato</label>
+        <p-dropdown [options]="correlatos" [filter]="true" placeholder="Selecione" 
+        name="correlato" [(ngModel)]="entradaCorrelato.correlato.codigo" #correlato="ngModel" required></p-dropdown>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Data de Fabricação</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="dataFabricacao" [(ngModel)]="entradaCorrelato.dataFabricacao" #dataFabricacao="ngModel" required></p-calendar>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Data de Validade</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="validade" [(ngModel)]="entradaCorrelato.dataValidade" #validade="ngModel" required></p-calendar>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Lote</label>
+        <input pInputText type="text" placeholder="Informe o lote" name="lote"
+        [(ngModel)]="entradaCorrelato.lote" #lote="ngModel" required>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Quantidade</label>
+        <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade"
+        [(ngModel)]="entradaCorrelato.quantidade" #quantidade="ngModel" required>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Valor Unitário</label>
+        <input pInputText type="text" placeholder="0,0" name="valorUnitario"
+        [(ngModel)]="entradaCorrelato.valorUnitario" #valorUnitario="ngModel" required>
+      </div>
+     
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-success" 
+        [routerLink]="['/entradacorrelatos/novo']" style="margin: 5px;"></button>
+        <a [routerLink]="['/entradacorrelatos']">Voltar para pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

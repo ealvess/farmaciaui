@@ -1,0 +1,69 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Médicos</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <Label>Nome</Label>
+        <input type="text" pInputText name="nome"  [(ngModel)]="filtro.nome" />
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="medicos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+      [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-nome-header">NOME</th>
+            <th class="col-codigo-header">CRM</th>
+            <th class="col-telefone">EMAIL</th>
+            <th class="col-telefone-header">TELEFONE</th>
+            <th class="col-telefone-header">CELULAR</th>
+            <th class="col-status-header">STATUS</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-medicos>
+          <tr>
+            <td>{{medicos.nome}}</td>
+            <td class="col-codigo-content">{{medicos.crm}}</td>
+            <td>{{medicos.email}}</td>
+            <td>{{medicos.telefone}}</td>
+            <td>{{medicos.celular}}</td>
+            <td class="col-status-content">
+              <a href="javascript:;"
+                [pTooltip]="medicos.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(medicos)">
+                {{ medicos.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 3px;" pTooltip="Editar"
+                [routerLink]="['/medicos', medicos.codigo]" class="button-acoes"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" (click)="confirmarExclusao(medicos)" class="button-acoes"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum médico encontrado
+        </ng-template>
+      </p-table>
+
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton [routerLink]="['/medicos/novo']" label="Novo Médico" class="ui-button-success"
+        style="margin: 5px;"></button>
+    </div>
+  </div>
+</div>

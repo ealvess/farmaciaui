@@ -1,0 +1,104 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Paciente</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" placeholder="Informe o nome" name="nome"
+        [(ngModel)]="paciente.nome" #nome="ngModel" required>
+
+        <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>CPF</label>
+        <p-inputMask mask="999-999-999-99"type="text" placeholder="Informe o CPF" name="cpf"
+        [(ngModel)]="paciente.cpf" #cpf="ngModel" required></p-inputMask>
+
+        <app-message [control]="cpf" error="required" text="Informe o CPF"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>RG</label>
+        <p-inputMask mask="99-999-999-9" type="text" placeholder="Informe o RG" name="rg" 
+        [(ngModel)]="paciente.rg" #rg="ngModel" required></p-inputMask>
+
+        <app-message [control]="rg" error="required" text="Informe o RG"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Data de Nascimento</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="dataNascimento" [(ngModel)]="paciente.dataNascimento" #dataNascimento="ngModel" required></p-calendar>
+
+        <app-message [control]="dataNascimento" error="required" text="Informe o CRM"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Sexo</label>
+        <p-dropdown [options]="sexos" type="text" placeholder="Selecione" name="sexo"
+        [(ngModel)]="paciente.sexo" #sexo="ngModel" required></p-dropdown>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Cartao SUS</label>
+        <p-inputMask mask="9999-9999" placeholder="Informe o número do cartão" name="cartaoSus"
+        [(ngModel)]="paciente.cartaoSus" #cartaoSus="ngModel" required></p-inputMask>
+
+        <app-message [control]="cartaoSus" error="required" text="Informe o número do cartão"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Logradouro</label>
+        <input pInputText type="text" placeholder="Informe o logradouro" name="logradouro"
+        [(ngModel)]="paciente.endereco.logradouro" #logradouro="ngModel" required>
+
+        <app-message [control]="logradouro" error="required" text="Informe o logradouro"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Número</label>
+        <input pInputText type="text" placeholder="Informe o número" name="numero"
+        [(ngModel)]="paciente.endereco.numero" #numero="ngModel" required>
+
+        <app-message [control]="numero" error="required" text="Informe o número"></app-message>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Complemento</label>
+        <input pInputText type="text" placeholder="Informe o complemento" name="complemento"
+        [(ngModel)]="paciente.endereco.complemento" #complemento="ngModel" >
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Bairro</label>
+        <input pInputText type="text" placeholder="Informe o bairro" name="bairro"
+        [(ngModel)]="paciente.endereco.bairro" #bairro="ngModel" required>
+
+        <app-message [control]="bairro" error="required" text="Informe o bairro"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>CEP</label>
+        <p-inputMask mask="99999-999" type="text" placeholder="Informe o cep" name="cep"
+        [(ngModel)]="paciente.endereco.cep" #cep="ngModel" required></p-inputMask>
+
+        <app-message [control]="cep" error="required" text="Informe o cep"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Cidade</label>
+        <input pInputText type="text" placeholder="Informe a cidade" name="cidade"
+        [(ngModel)]="paciente.endereco.cidade" #cidade="ngModel" required>
+
+        <app-message [control]="cidade" error="required" text="Informe a cidade"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Estado</label>
+        <input pInputText type="text" placeholder="Informe o estado" name="estado"
+        [(ngModel)]="paciente.endereco.estado" #estado="ngModel" required>
+
+        <app-message [control]="estado" error="required" text="Informe o estado"></app-message>
+      </div>
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
+        <a [routerLink]="['/pacientes']">Voltar para pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

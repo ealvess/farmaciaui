@@ -1,0 +1,62 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Pacientes</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <Label>Nome</Label>
+        <input type="text" pInputText name="nome"  [(ngModel)]="filtro.nome" />
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="pacientes" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+      [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th class="col-nome-header">NOME</th>
+            <th class="col-codigo-header">CPF</th>
+            <th class="col-codigo-header">RG</th>
+            <th class="col-data-header">DATA DE NASCIMENTO</th>
+            <th class="col-telefone-header">Nº CATÃO SUS</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pacientes>
+          <tr>
+            <td class="col-codigo-content">{{pacientes.codigo}}</td>
+            <td >{{pacientes.nome}}</td>
+            <td class="col-codigo-content">{{pacientes.cpf}}</td>
+            <td class="col-codigo-content">{{pacientes.rg}}</td>
+            <td class="col-data-content">{{pacientes.dataNascimento | date:'dd/MM/yyyy'}}</td>
+            <td>{{pacientes.cartaoSus}}</td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 3px;" pTooltip="Editar"
+                [routerLink]="['/pacientes', pacientes.codigo]" class="button-acoes"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" (click)="confirmarExclusao(pacientes)" class="button-acoes"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum paciente encontrado
+        </ng-template>
+      </p-table>
+
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton [routerLink]="['/pacientes/novo']" label="Novo Paciente" class="ui-button-success"
+        style="margin: 5px;"></button>
+    </div>
+  </div>
+</div>

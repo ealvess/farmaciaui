@@ -1,0 +1,77 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Médico</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" placeholder="Informe o nome" name="nome"
+        [(ngModel)]="medico.nome" #nome="ngModel" required>
+
+        <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>CPF</label>
+        <p-inputMask mask="999-999-999-99"type="text" placeholder="Informe o CPF" name="cpf"
+        [(ngModel)]="medico.cpf" #cpf="ngModel" required></p-inputMask>
+
+        <app-message [control]="cpf" error="required" text="Informe o CPF"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>RG</label>
+        <p-inputMask mask="99-999-999-9" type="text" placeholder="Informe o RG" name="rg" 
+        [(ngModel)]="medico.rg" #rg="ngModel" required></p-inputMask>
+
+        <app-message [control]="rg" error="required" text="Informe o RG"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>CRM</label>
+        <input pInputText  placeholder="Informe o CRM" name="crm"
+        [(ngModel)]="medico.crm" #crm="ngModel" required>
+
+        <app-message [control]="crm" error="required" text="Informe o CRM"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Data de Inscricao</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="dataInscricao" [(ngModel)]="medico.dataInscricao" #dataInscricao="ngModel" required></p-calendar>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>E-mail</label>
+        <input pInputText type="text" placeholder="Informe o email" name="email"
+        [(ngModel)]="medico.email" #email="ngModel" required>
+
+        <app-message [control]="email" error="required" text="Informe o email"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Telefone</label>
+        <p-inputMask mask="(99)9999-9999" placeholder="Informe um telefone" name="telefone"
+        [(ngModel)]="medico.telefone" #telefone="ngModel" required></p-inputMask>
+
+        <app-message [control]="telefone" error="required" text="Informe um telefone"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Celular</label>
+        <p-inputMask mask="(99)99999-9999" placeholder="Informe um telefone" name="celular"
+        [(ngModel)]="medico.celular" required></p-inputMask>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Status</label>
+        <p-dropdown [options]="status" name="ativo"
+        [(ngModel)]="medico.ativo" #ativo="ngModel" required></p-dropdown>
+
+        <app-message [control]="ativo" error="required" text="Selecione uma opção"></app-message>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
+        <a [routerLink]="['/medicos']">Voltar para pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

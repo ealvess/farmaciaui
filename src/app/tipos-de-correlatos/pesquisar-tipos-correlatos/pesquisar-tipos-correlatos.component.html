@@ -1,0 +1,70 @@
+<div class="container">
+  
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Tipos de Correlatos</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Correlato</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="tiposDeCorrelatos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+      [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th>NOME</th>
+            <th class="col-apresentacao-header">CATEGORIA</th>
+            <th class="col-data-header">APRESENTAÇÃO</th>
+            <th class="col-data-header">QTD MÍNIMA</th>
+            <th class="col-quantidade-header">LOCALIZAÇÃO</th>
+            <th class="col-status-header">STATUS</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-correlato>
+          <tr>
+            <td class="col-codigo-content">{{correlato.codigo}}</td>
+            <td>{{correlato.nome}}</td>
+            <td class="col-apresentacao-content">{{correlato.categoriaCorrelato.nome}}</td>
+            <td class="col-data-content">{{correlato.unidadeDeMedida}}</td>
+            <td class="col-data-content">{{correlato.quantidadeMinima}}</td>
+            <td class="col-quantidade-content">{{correlato.localizacao}}</td>
+            <td class="col-status-content">
+              <a href="javascript:;"
+                [pTooltip]="correlato.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(correlato)">
+                {{ correlato.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 5px;" pTooltip="Editar" class="button-acoes"
+              [routerLink]="['/tiposcorrelatos', correlato.codigo]"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" class="button-acoes" (click)="confirmarExclusao(correlato)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum correlato encontrado
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton label="Novo Tipo de Correlato" [routerLink]="['/tiposcorrelatos/novo']" class="ui-button-success"></button>
+      <button pButton label="Voltar para entrada de correlatos" style="margin: 5px;" [routerLink]="['/entradacorrelatos']" class="ui-button-success"></button>
+    </div>
+  </div>
+</div>

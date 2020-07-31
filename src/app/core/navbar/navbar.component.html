@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"> <i class="pi pi-bars">
+          </i></a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="navbar-menu" [hidden]="!exibindoMenu">
+    <li class="navbar-usuario">Everton Alves</li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/medicos">Médico</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/pacientes">Paciente</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/fornecedores">Fornecedores</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/entradamedicamentos">Medicamentos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/entradacorrelatos">Correlatos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a href="#">Sair</a></li>
+  </ul>
+</nav>

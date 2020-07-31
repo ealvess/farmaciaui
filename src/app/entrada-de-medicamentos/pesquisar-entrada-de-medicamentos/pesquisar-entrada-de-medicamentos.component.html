@@ -1,0 +1,76 @@
+<div class="container">
+
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Estoque de Medicamentos</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <label style="display: block">Validade</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [yearNavigator]="true" yearRange="2000:3000" [inputStyle]="{ width: '95px' }" 
+        [monthNavigator]="true" name="vencimentoInicio" [(ngModel)]="filtro.dataValidadeInicio"></p-calendar>
+
+        <label>até</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [yearNavigator]="true" yearRange="2000:3000" [inputStyle]="{ width: '95px' }" 
+        [monthNavigator]="true" name="vencimentoFim" [(ngModel)]="filtro.dataValidadeFim"></p-calendar>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="medicamentos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th>NOME</th>
+            <th class="col-apresentacao-header">APRESENTAÇÃO</th>
+            <th class="col-data-header">ENTRADA</th>
+            <th class="col-data-header">VALIDADE</th>
+            <th class="col-quantidade-header">QUANTIDADE</th>
+            <th class="col-valor-header">VALOR UNITÁRIO</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-med>
+          <tr>
+            <td class="col-codigo-content">{{med.codigo}}</td>
+            <td>{{med.medicamento}}</td>
+            <td class="col-apresentacao-content">{{med.apresentacao}}</td>
+            <td class="col-data-content">{{med.dataEntrada | date:'dd/MM/yyyy'}}</td>
+            <td class="col-data-content">{{med.dataValidade | date:'dd/MM/yyyy'}}</td>
+            <td class="col-quantidade-content">{{med.quantidade}}</td>
+            <td class="col-valor-content">{{med.valorUnitario}}</td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 5px;" pTooltip="Editar" class="button-acoes"
+              [routerLink]="['/entradamedicamentos', med.codigo]"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" class="button-acoes" 
+              (click)="confirmarExclusao(med)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhuma entrada de medicamento encontrada
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton label="Nova Entrada" class="ui-button-success" [routerLink]="['/entradamedicamentos/novo']"></button>
+      <button pButton label="Categoria de Medicamento" style="margin: 5px;" [routerLink]="['/categorias']" class="ui-button-success"></button>
+      <button pButton label="Cadastrar Tipo de Medicamento" [routerLink]="['/tiposmedicamentos']" class="ui-button-success"></button>
+    </div>
+  </div>
+</div>

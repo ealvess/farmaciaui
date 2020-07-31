@@ -1,0 +1,66 @@
+<div class="container">
+
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Categorias de Correlatos</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <Label>Nome</Label>
+        <input type="text" pInputText name="nome" [(ngModel)]="filtro.nome" />
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="categorias" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+      [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th>NOME</th>
+            <th class="col-status-header" >STATUS</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cat>
+          <tr>
+            <td class="col-codigo-content">{{cat.codigo}}</td>
+            <td>{{cat.nome}}</td>
+            <td class="col-status-content">
+              <a href="javascript:;"
+              [pTooltip]="cat.ativo ? 'Desativar' : 'Ativar'"
+              tooltipPosition="top"
+              (click)="alternarStatus(cat)">
+              {{ cat.ativo ? 'Ativo' : 'Inativo' }}
+            </a>
+            </td>
+            <td class="col-acoes">
+              <button pButton icon="pi pi-pencil" style="margin-right: 5px;" pTooltip="Editar" 
+              [routerLink]="['/categoriascorrelato', cat.codigo]"  class="button-acoes"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" 
+              (click)="confirmarExclusao(cat)" class="button-acoes"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhuma categoria encontrada
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton label="Nova Categoria" routerLink="/categoriascorrelato/novo"
+       style="margin: 5px;" class="ui-button-success"></button>
+      <button pButton label="Voltar" routerLink="/entradacorrelatos" class="ui-button-success"></button>
+    </div>
+  </div>
+</div>
+
