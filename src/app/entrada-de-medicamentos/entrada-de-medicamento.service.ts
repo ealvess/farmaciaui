@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 import { EntradaMedicamento } from '../core/model';
+import { environment } from 'src/environments/environment';
 
 export class EntradaDeMedicamentoFiltro {
   nome: string;
@@ -18,12 +19,13 @@ export class EntradaDeMedicamentoFiltro {
 })
 export class EntradaDeMedicamentoService {
 
-  entradaMedicamentoUrl = 'http://localhost:8080/entradamedicamentos';
+  entradaMedicamentoUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.entradaMedicamentoUrl = `${environment.apiUrl}/entradamedicamentos`
+  }
 
   pesquisar(filtro: EntradaDeMedicamentoFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -35,13 +37,13 @@ export class EntradaDeMedicamentoService {
 
     if (filtro.dataValidadeInicio) {
       params = params.set('dataValidadeDe', moment(filtro.dataValidadeInicio).format('YYYY-MM-DD'));
-  }
-  
-  if (filtro.dataValidadeFim) {
-      params = params.set('dataValidadeAte', moment(filtro.dataValidadeFim).format('YYYY-MM-DD'));
-  }
+    }
 
-    return this.http.get(`${this.entradaMedicamentoUrl}?resumo`, { headers, params })
+    if (filtro.dataValidadeFim) {
+      params = params.set('dataValidadeAte', moment(filtro.dataValidadeFim).format('YYYY-MM-DD'));
+    }
+
+    return this.http.get(`${this.entradaMedicamentoUrl}?resumo`, { params })
       .toPromise()
       .then(response => {
         const medicamentos = response['content']
@@ -54,19 +56,13 @@ export class EntradaDeMedicamentoService {
   }
 
   salvar(entradaMedicamento: EntradaMedicamento): Promise<EntradaMedicamento> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.post<EntradaMedicamento>(this.entradaMedicamentoUrl, entradaMedicamento, { headers })
+    return this.http.post<EntradaMedicamento>(this.entradaMedicamentoUrl, entradaMedicamento)
       .toPromise();
 
   }
 
   atualizar(entradaMedicamento: EntradaMedicamento): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.put<EntradaMedicamento>(`${this.entradaMedicamentoUrl}/${entradaMedicamento.codigo}`, entradaMedicamento, { headers })
+    return this.http.put<EntradaMedicamento>(`${this.entradaMedicamentoUrl}/${entradaMedicamento.codigo}`, entradaMedicamento)
       .toPromise()
       .then(response => {
         const entradaAlterada = response;
@@ -75,18 +71,27 @@ export class EntradaDeMedicamentoService {
       });
   }
 
+  listarTodas() {
+    return this.http.get<any>(`${this.entradaMedicamentoUrl}/listar`)
+      .toPromise()
+      .then(response => response);
+  }
+
 
   buscaPorCodigo(codigo: number): Promise<EntradaMedicamento> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<EntradaMedicamento>(`${this.entradaMedicamentoUrl}/${codigo}`, { headers })
+    return this.http.get<EntradaMedicamento>(`${this.entradaMedicamentoUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const entrada = response;
         this.converterStringsParaDatas([entrada]);
         return entrada;
       });
+  }
+
+  excluir(codigo: number): Promise<void> {
+    return this.http.delete(`${this.entradaMedicamentoUrl}/${codigo}`)
+      .toPromise()
+      .then(() => null);
   }
 
   private converterStringsParaDatas(entradas: EntradaMedicamento[]) {

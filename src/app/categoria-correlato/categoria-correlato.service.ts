@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 import { CategoriaCorrelato } from '../core/model';
+import { environment } from 'src/environments/environment';
 
 export class CategoriaCorrelatoFiltro {
   nome: string;
@@ -15,12 +16,13 @@ export class CategoriaCorrelatoFiltro {
 })
 export class CategoriaCorrelatoService {
 
-  categoriasUrl = 'http://localhost:8080/categoriascorrelato';
+  categoriasUrl : string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.categoriasUrl = `${environment.apiUrl}/categoriascorrelato`
+   }
 
   pesquisar(filtro: CategoriaCorrelatoFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -30,7 +32,7 @@ export class CategoriaCorrelatoService {
       params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.categoriasUrl}`, { headers, params })
+    return this.http.get(`${this.categoriasUrl}`, { params })
       .toPromise()
       .then(response => {
         const categorias = response['content']
@@ -43,29 +45,20 @@ export class CategoriaCorrelatoService {
   }
 
   listarTodas(){
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<any>(`${this.categoriasUrl}/listar`, { headers })
+    return this.http.get<any>(`${this.categoriasUrl}/listar`)
       .toPromise()
       .then(response => response);
   }
 
   salvar(categoria: CategoriaCorrelato): Promise<CategoriaCorrelato> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.post<CategoriaCorrelato>(this.categoriasUrl, categoria, { headers })
+    return this.http.post<CategoriaCorrelato>(this.categoriasUrl, categoria)
       .toPromise();
 
   }
 
   atualizar(categoria: CategoriaCorrelato): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
     return this.http.put<CategoriaCorrelato>(`${this.categoriasUrl}/${categoria.codigo}`, 
-    categoria, { headers })
+    categoria)
       .toPromise()
       .then(response => {
         const categoriaAlterada = response;
@@ -76,10 +69,7 @@ export class CategoriaCorrelatoService {
 
 
   buscaPorCodigo(codigo: number): Promise<CategoriaCorrelato> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<CategoriaCorrelato>(`${this.categoriasUrl}/${codigo}`, { headers })
+    return this.http.get<CategoriaCorrelato>(`${this.categoriasUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const categoria = response
@@ -88,20 +78,14 @@ export class CategoriaCorrelatoService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    const headers = new HttpHeaders()
-      .set('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu')
-      .set('Content-Type', 'application/json');
-
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
     return this.http.put(`${this.categoriasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.delete(`${this.categoriasUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.categoriasUrl}/${codigo}`)
       .toPromise()
       .then(() => null);
   }

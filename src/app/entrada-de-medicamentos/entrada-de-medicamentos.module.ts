@@ -10,7 +10,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { DropdownModule } from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
-
+import {TabMenuModule} from 'primeng/tabmenu';
+import {MenuItem} from 'primeng/api';
 
 import { PesquisarEntradaDeMedicamentosComponent } from './pesquisar-entrada-de-medicamentos/pesquisar-entrada-de-medicamentos.component';
 import { EntradaDeMedicamentosRoutingModule } from './entrada-de-medicamentos-routing.module';
@@ -35,6 +36,7 @@ import { CadastrarEntradaDeMedicamentosComponent } from './cadastrar-entrada-de-
     DropdownModule,
     CalendarModule,
     DialogModule,
+    TabMenuModule, 
 
     EntradaDeMedicamentosRoutingModule
   ],

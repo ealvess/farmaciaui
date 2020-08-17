@@ -1,0 +1,27 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Centro de Custo</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" placeholder="Informe o nome do centro de custo" 
+        name="nome" [(ngModel)]="centroDeCusto.nome" #nome="ngModel" required>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Status</label>
+        <p-dropdown [options]="status" placeholder="Selecione"
+        name="ativo" [(ngModel)]="centroDeCusto.ativo" #ativo="ngModel"></p-dropdown>
+      </div>
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
+        <button pButton type="button" label="Voltar para pesquisa" class="ui-button-success" style="margin: 5px;" routerLink="/centrodecusto"></button>
+      </div>
+    </div>
+
+  </form>
+</div>

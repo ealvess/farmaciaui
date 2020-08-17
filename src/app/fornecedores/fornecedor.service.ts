@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Fornecedor } from '../core/model';
+import { environment } from 'src/environments/environment';
 
 export class fornecedorFiltro {
   nome: string;
@@ -14,12 +15,13 @@ export class fornecedorFiltro {
 })
 export class FornecedorService {
 
-  fornecedoresUrl = 'http://localhost:8080/fornecedores';
+  fornecedoresUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.fornecedoresUrl = `${environment.apiUrl}/fornecedores`
+  }
 
   pesquisar(filtro: fornecedorFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -29,7 +31,7 @@ export class FornecedorService {
       params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.fornecedoresUrl}?resumo`, { headers, params })
+    return this.http.get(`${this.fornecedoresUrl}?resumo`, { params })
       .toPromise()
       .then(response => {
         const fornecedores = response['content']
@@ -41,46 +43,34 @@ export class FornecedorService {
       });
   }
 
-  listarTodos(){
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get(`${this.fornecedoresUrl}?resumo`, { headers, params })
+  listarTodos() {
+    return this.http.get(`${this.fornecedoresUrl}?resumo`)
       .toPromise()
       .then(response => {
         const fornecedores = response['content']
         const resultado = {
           fornecedores,
           total: response['totalElements']
-        }        
+        }
         return resultado;
       });
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.delete(`${this.fornecedoresUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.fornecedoresUrl}/${codigo}`)
       .toPromise()
       .then(() => null);
   }
 
   salvar(fornecedor: Fornecedor): Promise<Fornecedor> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
     return this.http.post<Fornecedor>(
-      this.fornecedoresUrl, fornecedor, { headers })
+      this.fornecedoresUrl, fornecedor)
       .toPromise();
 
   }
 
   atualizar(fornecedor: Fornecedor): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.put<Fornecedor>(`${this.fornecedoresUrl}/${fornecedor.codigo}`, fornecedor, { headers })
+    return this.http.put<Fornecedor>(`${this.fornecedoresUrl}/${fornecedor.codigo}`, fornecedor)
       .toPromise()
       .then(response => {
         const fornecedorAlterado = response;
@@ -89,11 +79,8 @@ export class FornecedorService {
       });
   }
 
-  buscaPorCodigo(codigo: number): Promise<Fornecedor>{
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<Fornecedor>(`${this.fornecedoresUrl}/${codigo}`, { headers })
+  buscaPorCodigo(codigo: number): Promise<Fornecedor> {
+    return this.http.get<Fornecedor>(`${this.fornecedoresUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const fornecedor = response
@@ -102,10 +89,7 @@ export class FornecedorService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    const headers = new HttpHeaders()
-    .set('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu')
-    .set('Content-Type', 'application/json');
-
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
     return this.http.put(`${this.fornecedoresUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);

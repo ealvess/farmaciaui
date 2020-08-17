@@ -5,6 +5,7 @@ import { ToastyService } from 'ng2-toasty';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisar-paciente',
@@ -22,6 +23,7 @@ export class PesquisarPacienteComponent implements OnInit {
   constructor(
     private pacienteService: PacienteService,
     private toasty: ToastyService,
+    private auth: AuthService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title) { }

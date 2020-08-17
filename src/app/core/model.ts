@@ -1,3 +1,5 @@
+import { Data } from '@angular/router';
+
 export class Fornecedor{
   codigo: number ;
 	nomeFantasia: string;
@@ -19,6 +21,12 @@ export class Fornecedor{
 }
 
 export class Categoria{
+	codigo: number;
+	nome: string;
+	ativo: boolean;
+}
+
+export class CentroDeCusto{
 	codigo: number;
 	nome: string;
 	ativo: boolean;
@@ -109,4 +117,33 @@ export class Paciente{
 	cartaoSus: number;
 	endereco = new Endereco();
 	
+}
+
+export class SaidaDeMedicamento{
+	codigo: number;
+	paciente = new Paciente();
+	entradaMedicamento = new EntradaMedicamento();
+	dataSaida: Date;
+	quantidade: number;
+	valorUnitario:number;
+	total: number;
+}
+export class SaidaDeMedicamentoPorCentroDeCusto{
+	codigo: number;
+	centrodeCusto = new CentroDeCusto();
+	entradaMedicamento = new EntradaMedicamento();
+	dataSaida: Date;
+	quantidade: number;
+	valorUnitario:number;
+	total: number;
+}
+
+export class SaidaDeCorrelato{
+	codigo: number;
+	centroDeCusto = new CentroDeCusto();
+	dataSaida: Date;
+	quantidade:number;
+	valorUnitario: number;
+	total: number;
+	entradaCorrelato = new EntradaCorrelato();
 }

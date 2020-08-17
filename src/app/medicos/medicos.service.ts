@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 import { Medico } from '../core/model';
+import { environment } from 'src/environments/environment';
 
 export class MedicoFiltro {
   nome: string;
@@ -14,12 +15,13 @@ export class MedicoFiltro {
   providedIn: 'root'
 })
 export class MedicosService {
-  medicosUrl = 'http://localhost:8080/medicos';
+  medicosUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.medicosUrl = `${environment.apiUrl}/medicos`
+  }
 
   pesquisar(filtro: MedicoFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -29,7 +31,7 @@ export class MedicosService {
       params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.medicosUrl}?resumo`, { headers, params })
+    return this.http.get(`${this.medicosUrl}?resumo`, { params })
       .toPromise()
       .then(response => {
         const medicos = response['content']
@@ -42,38 +44,26 @@ export class MedicosService {
   }
 
   listarTodos() {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<any>(`${this.medicosUrl}/listar`, { headers })
+    return this.http.get<any>(`${this.medicosUrl}/listar`)
       .toPromise()
       .then(response => response);
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.delete(`${this.medicosUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.medicosUrl}/${codigo}`)
       .toPromise()
       .then(() => null);
   }
 
   salvar(medico: Medico): Promise<Medico> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
     return this.http.post<Medico>(
-      this.medicosUrl, medico, { headers })
+      this.medicosUrl, medico)
       .toPromise();
 
   }
 
   atualizar(medico: Medico): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.put<Medico>(`${this.medicosUrl}/${medico.codigo}`, medico, { headers })
+    return this.http.put<Medico>(`${this.medicosUrl}/${medico.codigo}`, medico)
       .toPromise()
       .then(response => {
         const medicoAlterado = response;
@@ -83,10 +73,7 @@ export class MedicosService {
   }
 
   buscaPorCodigo(codigo: number): Promise<Medico> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<Medico>(`${this.medicosUrl}/${codigo}`, { headers })
+    return this.http.get<Medico>(`${this.medicosUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const medico = response
@@ -96,10 +83,7 @@ export class MedicosService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    const headers = new HttpHeaders()
-      .set('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu')
-      .set('Content-Type', 'application/json');
-
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
     return this.http.put(`${this.medicosUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);

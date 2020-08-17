@@ -9,12 +9,19 @@
   </div>
 
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
-    <li class="navbar-usuario">Everton Alves</li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/medicos">Médico</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/pacientes">Paciente</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/fornecedores">Fornecedores</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/entradamedicamentos">Medicamentos</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/entradacorrelatos">Correlatos</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"><a href="#">Sair</a></li>
+    <li class="navbar-usuario">{{ auth.jwtPayload?.nome }}</li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_MEDICO')"><a routerLink="/medicos">Médico</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_PACIENTE')"><a routerLink="/pacientes">Paciente</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_FORNECEDOR')"><a routerLink="/fornecedores">Fornecedores</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_CENTRO_DE_CUSTO')"><a routerLink="/centrodecusto">Centro de Custo</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/entradamedicamentos">Medicamentos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_CORRELATO')"><a routerLink="/entradacorrelatos">Correlatos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"><a href="javascript:;" (click)="logout()">Sair</a></li>
   </ul>
 </nav>

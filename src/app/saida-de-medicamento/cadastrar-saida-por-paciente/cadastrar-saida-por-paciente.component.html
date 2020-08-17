@@ -1,0 +1,43 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1> Saida de Medicamento</h1>
+      </div>
+
+      <div class="ui-g-6 ui-fluid">
+        <label>Paciente</label>
+        <p-dropdown [options]="pacientes" [filter]="true" placeholder="Selecione" 
+        name="paciente" [(ngModel)]="saidaPorPaciente.paciente.codigo" #paciente="ngModel" required ></p-dropdown>
+
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Medicamento</label>
+        <p-dropdown [options]="medicamentos" [filter]="true" placeholder="Selecione" 
+        name="entradaMedicamento" [(ngModel)]="saidaPorPaciente.entradaMedicamento.codigo" #entradaMedicamento="ngModel" 
+        (click)="pegarValores(saidaPorPaciente.entradaMedicamento.codigo)" required ></p-dropdown>
+
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Data Saida</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="dataSaida" [(ngModel)]="saidaPorPaciente.dataSaida" #dataSaida="ngModel" required></p-calendar>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Quantidade</label>
+        <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade" 
+        [(ngModel)]="saidaPorPaciente.quantidade" #quantidade="ngModel">
+      </div>
+      
+      
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Nova Saida" (click)="novo(f)" class="ui-button-success" style="margin: 5px;" ></button>
+        <button pButton type="button" label="Voltar para pesquisa" class="ui-button-success" style="margin: 5px;" routerLink="/saidamedicamento"></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+

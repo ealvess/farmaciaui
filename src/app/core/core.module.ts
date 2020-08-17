@@ -21,9 +21,16 @@ import { EntradaCorrelatosService } from '../entrada-de-correlatos/entrada-corre
 import {ConfirmationService} from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
+
 import { Title } from '@angular/platform-browser';
 import { CategoriaCorrelatoService } from '../categoria-correlato/categoria-correlato.service';
 import { TiposCorrelatosService } from '../tipos-de-correlatos/tipos-correlatos.service';
+import { CentroDeCustoService } from '../centro-de-custo/centro-de-custo.service';
+import { SaidaDeMedicamentoService } from '../saida-de-medicamento/saida-de-medicamento.service';
+import { CadastrarSaidaCentroDeCustoService } from '../saida-medicmento-centro-de-custo/cadastrar-saida-centro-de-custo.service';
+import { CadastrarSaidaDeCorrelatoService } from '../saida-de-correlato-por-centro-de-custo/cadastrar-saida-de-correlato.service';
+import { AuthService } from '../seguranca/auth.service';
 
 // E por fim, registre o localePt como 'pt-BR'
 registerLocaleData(localePt, 'pt-BR');
@@ -32,6 +39,7 @@ registerLocaleData(localePt, 'pt-BR');
   declarations: [
     NavbarComponent,
     PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +62,11 @@ registerLocaleData(localePt, 'pt-BR');
     PacienteService,
     CategoriaCorrelatoService,
     TiposCorrelatosService,
+    CentroDeCustoService,
+    SaidaDeMedicamentoService,
+    CadastrarSaidaCentroDeCustoService,
+    CadastrarSaidaDeCorrelatoService,
+    AuthService,
     Title,
     {
       provide: LOCALE_ID , useValue:'pt-BR'

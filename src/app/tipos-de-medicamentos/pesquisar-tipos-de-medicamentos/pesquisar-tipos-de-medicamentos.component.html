@@ -51,8 +51,8 @@
             </td>
             <td class="col-acoes">
               <button pButton icon="pi pi-pencil" style="margin-right: 5px;" pTooltip="Editar" class="button-acoes"
-              [routerLink]="['/tiposmedicamentos', med.codigo]"></button>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" class="button-acoes" (click)="confirmarExclusao(med)"></button>
+              [routerLink]="['/tiposmedicamentos', med.codigo]" [disabled]="!auth.temPermissao('ROLE_CADASTRAR_MEDICAMENTO')"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" class="button-acoes" (click)="confirmarExclusao(med)" [disabled]="!auth.temPermissao('ROLE_REMOVER_MEDICAMENTO')"></button>
             </td>
           </tr>
         </ng-template>

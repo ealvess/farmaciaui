@@ -1,0 +1,71 @@
+<div class="container">
+
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Saida de Medicamentos Por Centro De Custo</h1>
+      </div>
+
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Centro de Custo</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.centroDeCusto">
+      </div>
+
+      <div class="ui-g-12">
+        <label style="display: block">Saida</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [yearNavigator]="true" yearRange="2000:3000"
+          [inputStyle]="{ width: '95px' }" [monthNavigator]="true" name="dataSaidaDe" [(ngModel)]="filtro.dataSaidaDe">
+        </p-calendar>
+
+        <label>até</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [yearNavigator]="true" yearRange="2000:3000"
+          [inputStyle]="{ width: '95px' }" [monthNavigator]="true" name="dataSaidaAte"
+          [(ngModel)]="filtro.dataSaidaAte"></p-calendar>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" icon="pi pi-search" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="medicamentos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th>CENTRO DE CUSTO</th>
+            <th>MEDICAMENTO</th>
+            <th class="col-data-header">DATA SAIDA</th>
+            <th class="col-quantidade-header">QUANTIDADE</th>
+            <th class="col-valor-header">VALOR UNITÁRIO</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-med>
+          <tr>
+            <td class="col-codigo-content">{{med.codigo}}</td>
+            <td>{{med.centrodeCusto.nome}}</td>
+            <td>{{med.entradaMedicamento.medicamento.nome}}</td>
+            <td class="col-data-content">{{med.dataSaida | date:'dd/MM/yyyy'}}</td>
+            <td class="col-quantidade-content">{{med.quantidade}}</td>
+            <td class="col-valor-content">{{med.valorUnitario}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhuma saida de medicamento encontrada
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton label="Nova Saida" icon="pi pi-plus" class="ui-button-success" [routerLink]="['/saidamedicamentocentrodecusto/novo']"></button>
+      <button pButton label="Voltar para o estoque" style="margin: 5px;" [routerLink]="['/entradamedicamentos']" 
+      icon="pi pi-arrow-left" class="ui-button-success"></button>
+    </div>
+  </div>
+</div>

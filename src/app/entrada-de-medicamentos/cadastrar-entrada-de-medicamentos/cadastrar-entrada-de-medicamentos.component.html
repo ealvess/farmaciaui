@@ -56,7 +56,7 @@
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-success" 
-        [routerLink]="['/entradamedicamentos/novo']" style="margin: 5px;"></button>
+        (click)="novo(f)" style="margin: 5px;"></button>
         <a [routerLink]="['/entradamedicamentos']">Voltar para pesquisa</a>
       </div>
     </div>

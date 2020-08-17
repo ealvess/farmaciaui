@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LazyLoadEvent, MenuItem, ConfirmationService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { EntradaDeMedicamentoService, EntradaDeMedicamentoFiltro } from '../entrada-de-medicamento.service';
+import { ToastyService } from 'ng2-toasty';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Table } from 'primeng/table';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 
 @Component({
@@ -12,15 +16,31 @@ import { EntradaDeMedicamentoService, EntradaDeMedicamentoFiltro } from '../entr
 export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
   totalRegistros = 0;
   filtro = new EntradaDeMedicamentoFiltro();
-  medicamentos = []
+  medicamentos = [];
   pt: any;
+  @ViewChild('tabela', { static: true }) grid: Table;
+  items: MenuItem[];
   
-  constructor(private entradaMedicamentoService: EntradaDeMedicamentoService,
-    private title: Title) { }
+  constructor(
+    private entradaMedicamentoService: EntradaDeMedicamentoService,
+    private auth: AuthService,
+    private toasty: ToastyService,
+    private confirmation: ConfirmationService,
+    private errorHandler: ErrorHandlerService,
+    private title: Title
+    ) { }
 
   ngOnInit(): void {
     this.title.setTitle('Entrada de Medicamentos');
     this.localizacaoCalendar();
+
+    this.items = [
+      { label: 'Nova Entrada', icon: 'pi pi-plus', routerLink:'/entradamedicamentos/novo' },
+      { label: 'Categoria de Medicamento', icon: 'pi pi-search-plus', routerLink: '/categorias' },
+      { label: 'Cadastrar Tipo de Medicamento', icon: 'pi pi-plus', routerLink: '/tiposmedicamentos' },
+      { label: 'Saida Por Paciente', icon: 'pi pi-file-excel', routerLink: '/saidamedicamento' },
+      { label: 'Saida Por Centro de Custo', icon: 'pi pi-file-excel', routerLink: '/saidamedicamentocentrodecusto' },
+    ];
   }
 
   pesquisar(pagina = 0) {
@@ -36,6 +56,25 @@ export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
+  }
+
+  confirmarExclusao(correlato: any) {
+    this.confirmation.confirm({
+      message: "Deseja excluir esta entrada?",
+      accept: () => {
+        this.excluir(correlato);
+      }
+    });
+  }
+
+  excluir(correlato: any) {
+    this.entradaMedicamentoService.excluir(correlato.codigo)
+      .then(() => {
+        console.log("excluido");
+        this.grid.reset();
+        this.toasty.success('Entrada de Correlato excluída com sucesso!')
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   localizacaoCalendar() {

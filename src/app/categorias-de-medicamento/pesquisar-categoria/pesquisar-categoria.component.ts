@@ -5,6 +5,7 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ToastyService } from 'ng2-toasty';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisar-categoria',
@@ -26,6 +27,7 @@ export class PesquisarCategoriaComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaService,
+    private auth: AuthService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,

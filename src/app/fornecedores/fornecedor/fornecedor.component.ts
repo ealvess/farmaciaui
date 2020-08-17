@@ -5,6 +5,7 @@ import { Table } from 'primeng/table';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-fornecedor',
@@ -20,6 +21,7 @@ export class FornecedorComponent implements OnInit {
 
   constructor(
     private fornecedorService: FornecedorService,
+    private auth: AuthService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
     private errorHandle: ErrorHandlerService,

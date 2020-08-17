@@ -3,24 +3,26 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 import { Correlato } from '../core/model';
+import { environment } from 'src/environments/environment';
 
 export class TiposDeCorrelatoFiltro {
   nome: string;
   pagina = 0;
-  itensPorPagina = 5; 
+  itensPorPagina = 5;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class TiposCorrelatosService {
- 
-  tiposCorrelatosUrl = 'http://localhost:8080/correlatos';
 
-  constructor(private http: HttpClient) { }
+  tiposCorrelatosUrl: string;
+
+  constructor(private http: HttpClient) {
+    this.tiposCorrelatosUrl = `${environment.apiUrl}/correlatos`
+   }
 
   pesquisar(filtro: TiposDeCorrelatoFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -30,7 +32,7 @@ export class TiposCorrelatosService {
       params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.tiposCorrelatosUrl}`, { headers, params })
+    return this.http.get(`${this.tiposCorrelatosUrl}`, { params })
       .toPromise()
       .then(response => {
         const correlatos = response['content']
@@ -42,40 +44,28 @@ export class TiposCorrelatosService {
       });
   }
 
-  listarTodos(){
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<any>(`${this.tiposCorrelatosUrl}/listar`, { headers })
-    .toPromise()
-    .then(response => response);
+  listarTodos() {
+    return this.http.get<any>(`${this.tiposCorrelatosUrl}/listar`)
+      .toPromise()
+      .then(response => response);
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.delete(`${this.tiposCorrelatosUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.tiposCorrelatosUrl}/${codigo}`)
       .toPromise()
       .then(() => null);
   }
 
   salvar(correlato: Correlato): Promise<Correlato> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
     return this.http.post<Correlato>(
-      this.tiposCorrelatosUrl, correlato, { headers })
+      this.tiposCorrelatosUrl, correlato)
       .toPromise();
 
   }
 
   atualizar(correlato: Correlato): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.put<Correlato>(`${this.tiposCorrelatosUrl}/${correlato.codigo}`, 
-    correlato, { headers })
+    return this.http.put<Correlato>(`${this.tiposCorrelatosUrl}/${correlato.codigo}`,
+      correlato)
       .toPromise()
       .then(response => {
         const correlatoAlterado = response;
@@ -84,11 +74,8 @@ export class TiposCorrelatosService {
       });
   }
 
-  buscaPorCodigo(codigo: number): Promise<Correlato>{
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<Correlato>(`${this.tiposCorrelatosUrl}/${codigo}`, { headers })
+  buscaPorCodigo(codigo: number): Promise<Correlato> {
+    return this.http.get<Correlato>(`${this.tiposCorrelatosUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const correlato = response
@@ -97,10 +84,7 @@ export class TiposCorrelatosService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    const headers = new HttpHeaders()
-    .set('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu')
-    .set('Content-Type', 'application/json');
-
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
     return this.http.put(`${this.tiposCorrelatosUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);

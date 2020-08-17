@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { CategoriaCorrelato } from 'src/app/core/model';
 import { FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-cadastrar-categoria-correlato',
@@ -24,6 +25,7 @@ export class CadastrarCategoriaCorrelatoComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaCorrelatoService,
+    private auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private toasty: ToastyService,
     private route: ActivatedRoute, 

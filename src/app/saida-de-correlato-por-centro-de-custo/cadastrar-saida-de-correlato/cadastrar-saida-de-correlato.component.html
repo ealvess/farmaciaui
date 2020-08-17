@@ -1,0 +1,43 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1> Saida de Correlatos Por Centro de Custo</h1>
+      </div>
+
+      <div class="ui-g-6 ui-fluid">
+        <label>Centro de Custo</label>
+        <p-dropdown [options]="centrodeCusto" [filter]="true" placeholder="Selecione" 
+        name="centroDeCusto" [(ngModel)]="saidaPorCentroDeCusto.centroDeCusto.codigo" #centroDeCusto="ngModel" required ></p-dropdown>
+
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Correlato</label>
+        <p-dropdown [options]="correlatos" [filter]="true" placeholder="Selecione" 
+        name="entradaCorrelato" [(ngModel)]="saidaPorCentroDeCusto.entradaCorrelato.codigo" #entradaCorrelato="ngModel" 
+        (click)="pegarValores(saidaPorCentroDeCusto.entradaCorrelato.codigo)" required ></p-dropdown>
+
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Data Saida</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
+        name="dataSaida" [(ngModel)]="saidaPorCentroDeCusto.dataSaida" #dataSaida="ngModel" required></p-calendar>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Quantidade</label>
+        <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade" 
+        [(ngModel)]="saidaPorCentroDeCusto.quantidade" #quantidade="ngModel">
+      </div>
+      
+      
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Nova Saida" (click)="novo(f)" class="ui-button-success" style="margin: 5px;" ></button>
+        <button pButton type="button" label="Voltar para pesquisa" class="ui-button-success" style="margin: 5px;" routerLink="/saidacorrelatoporcentrodecusto"></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+

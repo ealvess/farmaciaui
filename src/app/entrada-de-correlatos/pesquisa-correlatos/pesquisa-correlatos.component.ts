@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EntradaDeCorrelatoFiltro, EntradaCorrelatosService } from '../entrada-correlatos.service';
 import { Title } from '@angular/platform-browser';
-import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService, MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisa-correlatos',
@@ -18,10 +19,12 @@ export class PesquisaCorrelatosComponent implements OnInit {
   correlatos = []
   pt: any;
   @ViewChild('tabela', { static: true }) grid: Table;
+  items: MenuItem[];
 
   constructor(
     private entradaCorrelatoService: EntradaCorrelatosService,
-   private toasty: ToastyService,
+    private auth: AuthService,
+    private toasty: ToastyService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title
@@ -30,6 +33,13 @@ export class PesquisaCorrelatosComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Entrada de Correlatos');
     this.localizacaoCalendar();
+
+    this.items = [
+      { label: 'Nova Entrada', icon: 'pi pi-plus', routerLink:'/entradacorrelatos/novo' },
+      { label: 'Categoria de Correlato', icon: 'pi pi-search-plus', routerLink: '/categoriascorrelato' },
+      { label: 'Cadastrar Tipo de Correlato', icon: 'pi pi-plus', routerLink: '/tiposcorrelatos' },
+      { label: 'Saida Por Centro de Custo', icon: 'pi pi-file-excel', routerLink: '/saidacorrelatoporcentrodecusto' },
+    ];
   }
 
   pesquisar(pagina = 0) {

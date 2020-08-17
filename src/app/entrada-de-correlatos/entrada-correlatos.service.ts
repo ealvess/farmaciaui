@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 import { EntradaCorrelato } from '../core/model';
+import { environment } from 'src/environments/environment';
 
 export class EntradaDeCorrelatoFiltro {
   nome: string;
@@ -18,12 +19,13 @@ export class EntradaDeCorrelatoFiltro {
 })
 export class EntradaCorrelatosService {
 
-  entradaCorrelatoUrl = 'http://localhost:8080/entradacorrelatos';
+  entradaCorrelatoUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.entradaCorrelatoUrl = `${environment.apiUrl}/entradacorrelatos`
+  }
 
   pesquisar(filtro: EntradaDeCorrelatoFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -35,13 +37,13 @@ export class EntradaCorrelatosService {
 
     if (filtro.dataValidadeInicio) {
       params = params.set('dataValidadeDe', moment(filtro.dataValidadeInicio).format('YYYY-MM-DD'));
-  }
-  
-  if (filtro.dataValidadeFim) {
-      params = params.set('dataValidadeAte', moment(filtro.dataValidadeFim).format('YYYY-MM-DD'));
-  }
+    }
 
-    return this.http.get(`${this.entradaCorrelatoUrl}?resumo`, { headers, params })
+    if (filtro.dataValidadeFim) {
+      params = params.set('dataValidadeAte', moment(filtro.dataValidadeFim).format('YYYY-MM-DD'));
+    }
+
+    return this.http.get(`${this.entradaCorrelatoUrl}?resumo`, { params })
       .toPromise()
       .then(response => {
         const correlatos = response['content']
@@ -54,21 +56,15 @@ export class EntradaCorrelatosService {
   }
 
   salvar(entradaCorrelato: EntradaCorrelato): Promise<EntradaCorrelato> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.post<EntradaCorrelato>(this.entradaCorrelatoUrl, 
-      entradaCorrelato, { headers })
+    return this.http.post<EntradaCorrelato>(this.entradaCorrelatoUrl,
+      entradaCorrelato)
       .toPromise();
 
   }
 
   atualizar(entradaCorrelato: EntradaCorrelato): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.put<EntradaCorrelato>(`${this.entradaCorrelatoUrl}/${entradaCorrelato.codigo}`, 
-    entradaCorrelato, { headers })
+    return this.http.put<EntradaCorrelato>(`${this.entradaCorrelatoUrl}/${entradaCorrelato.codigo}`,
+      entradaCorrelato)
       .toPromise()
       .then(response => {
         const entradaAlterada = response;
@@ -77,12 +73,15 @@ export class EntradaCorrelatosService {
       });
   }
 
+  listarTodos() {
+    return this.http.get<any>(`${this.entradaCorrelatoUrl}/listar`)
+      .toPromise()
+      .then(response => response);
+  }
+
 
   buscaPorCodigo(codigo: number): Promise<EntradaCorrelato> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.get<EntradaCorrelato>(`${this.entradaCorrelatoUrl}/${codigo}`, { headers })
+    return this.http.get<EntradaCorrelato>(`${this.entradaCorrelatoUrl}/${codigo}`)
       .toPromise()
       .then(response => {
         const entrada = response;
@@ -92,10 +91,7 @@ export class EntradaCorrelatosService {
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-    let params = new HttpParams();
-
-    return this.http.delete(`${this.entradaCorrelatoUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.entradaCorrelatoUrl}/${codigo}`)
       .toPromise()
       .then(() => null);
   }

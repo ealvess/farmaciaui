@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CategoriaCorrelato } from 'src/app/core/model';
 import { CategoriaCorrelatoService, CategoriaCorrelatoFiltro } from '../categoria-correlato.service';
 import { ToastyService } from 'ng2-toasty';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
 import { Table } from 'primeng/table';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisar-categoria-correlato',
@@ -27,6 +27,7 @@ export class PesquisarCategoriaCorrelatoComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaCorrelatoService,
+    public auth: AuthService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,

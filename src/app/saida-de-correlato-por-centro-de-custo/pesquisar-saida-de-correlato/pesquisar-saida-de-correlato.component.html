@@ -1,0 +1,71 @@
+<div class="container">
+
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Saida de Correlatos Por Centro de Custo</h1>
+      </div>
+
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Correlato</label>
+        <input pInputText type="text" name="nomecorrelato" [(ngModel)]="filtro.nomecorrelato">
+      </div>
+
+      <div class="ui-g-12">
+        <label style="display: block">Saida</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [yearNavigator]="true" yearRange="2000:3000"
+          [inputStyle]="{ width: '95px' }" [monthNavigator]="true" name="dataSaidaDe" [(ngModel)]="filtro.dataSaidaDe">
+        </p-calendar>
+
+        <label>até</label>
+        <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [yearNavigator]="true" yearRange="2000:3000"
+          [inputStyle]="{ width: '95px' }" [monthNavigator]="true" name="dataSaidaAte"
+          [(ngModel)]="filtro.dataSaidaAte"></p-calendar>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" icon="pi pi-search" class="ui-button-success"></button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="correlatos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-codigo-header">CODIGO</th>
+            <th>CENTRO DE CUSTO</th>
+            <th>CORRELATO</th>
+            <th class="col-data-header">DATA SAIDA</th>
+            <th class="col-quantidade-header">QUANTIDADE</th>
+            <th class="col-valor-header">VALOR UNITÁRIO</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cor>
+          <tr>
+            <td class="col-codigo-content">{{cor.codigo}}</td>
+            <td>{{cor.centroDeCusto.nome}}</td>
+            <td>{{cor.entradaCorrelato.correlato.nome}}</td>
+            <td class="col-data-content">{{cor.dataSaida | date:'dd/MM/yyyy'}}</td>
+            <td class="col-quantidade-content">{{cor.quantidade}}</td>
+            <td class="col-valor-content">{{cor.valorUnitario}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhuma saida de correlato encontrada
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton label="Nova Saida" icon="pi pi-plus" class="ui-button-success" [routerLink]="['/saidacorrelatoporcentrodecusto/novo']"></button>
+      <button pButton label="Voltar para o estoque" style="margin: 5px;" [routerLink]="['/entradacorrelatos']" 
+      icon="pi pi-arrow-left" class="ui-button-success"></button>
+    </div>
+  </div>
+</div>

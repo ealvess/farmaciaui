@@ -49,8 +49,10 @@
             </td>
             <td class="col-acoes">
               <button pButton icon="pi pi-pencil" style="margin-right: 3px;" pTooltip="Editar"
-                [routerLink]="['/medicos', medicos.codigo]" class="button-acoes"></button>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" (click)="confirmarExclusao(medicos)" class="button-acoes"></button>
+                [routerLink]="['/medicos', medicos.codigo]" 
+                [disabled]="!auth.temPermissao('ROLE_CADASTRAR_MEDICO')"class="button-acoes"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" (click)="confirmarExclusao(medicos)" 
+              [disabled]="!auth.temPermissao('ROLE_REMOVER_MEDICO')" class="button-acoes"></button>
             </td>
           </tr>
         </ng-template>
