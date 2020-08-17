@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import 'rxjs/add/operator/toPromise';
 import { Medicamento } from '../core/model';
 import { environment } from 'src/environments/environment';
 

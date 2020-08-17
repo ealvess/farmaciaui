@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
-import { SaidaDeMedicamento, SaidaDeCorrelato } from '../core/model';
+import { SaidaDeCorrelato } from '../core/model';
 import { environment } from 'src/environments/environment';
 
 export class SaidaDeCorrelatoFiltro {
