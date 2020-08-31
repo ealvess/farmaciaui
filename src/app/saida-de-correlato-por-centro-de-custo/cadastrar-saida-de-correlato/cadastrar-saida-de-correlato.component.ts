@@ -3,7 +3,7 @@ import { SaidaDeCorrelato } from 'src/app/core/model';
 import { CadastrarSaidaDeCorrelatoService } from '../cadastrar-saida-de-correlato.service';
 import { CentroDeCustoService } from 'src/app/centro-de-custo/centro-de-custo.service';
 import { EntradaCorrelatosService } from 'src/app/entrada-de-correlatos/entrada-correlatos.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -28,7 +28,7 @@ export class CadastrarSaidaDeCorrelatoComponent implements OnInit {
     private saidaService: CadastrarSaidaDeCorrelatoService,
     private centroDeCustoService: CentroDeCustoService,
     private entradaCorrelatoService: EntradaCorrelatosService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private router: Router,
     private title: Title
@@ -78,7 +78,7 @@ export class CadastrarSaidaDeCorrelatoComponent implements OnInit {
     
     this.saidaService.salvar(this.saidaPorCentroDeCusto)
     .then(() => {
-      this.toasty.success('Saida de correlato realizada!');
+      this.messageService.add({ severity:'success', detail:'Saida de correlato realizada!'});
 
       form.reset();
       this.saidaPorCentroDeCusto = new SaidaDeCorrelato();

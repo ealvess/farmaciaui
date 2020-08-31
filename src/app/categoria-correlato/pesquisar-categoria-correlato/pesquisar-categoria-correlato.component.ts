@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriaCorrelatoService, CategoriaCorrelatoFiltro } from '../categoria-correlato.service';
-import { ToastyService } from 'ng2-toasty';
+import {MessageService} from 'primeng/api';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
@@ -28,7 +28,7 @@ export class PesquisarCategoriaCorrelatoComponent implements OnInit {
   constructor(
     private categoriaService: CategoriaCorrelatoService,
     public auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title) { }
@@ -62,7 +62,7 @@ export class PesquisarCategoriaCorrelatoComponent implements OnInit {
 
         categoria.ativo = novoStatus;
         
-        this.toasty.success(`Categoria ${acao} com sucesso!`);
+        this.messageService.add({ severity: 'success', detail:`Categoria ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -80,7 +80,7 @@ export class PesquisarCategoriaCorrelatoComponent implements OnInit {
     this.categoriaService.excluir(categoria.codigo)
       .then(() => {
         this.grid.reset();
-        this.toasty.success('Categoria excluída com sucesso!')
+        this.messageService.add({ severity: 'success', detail:'Categoria excluída com sucesso!' } )
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

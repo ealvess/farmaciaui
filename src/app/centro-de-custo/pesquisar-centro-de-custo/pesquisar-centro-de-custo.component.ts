@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CentroDeCustoFiltro, CentroDeCustoService } from '../centro-de-custo.service';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
@@ -28,7 +28,7 @@ export class PesquisarCentroDeCustoComponent implements OnInit {
   constructor(
     private centroDeCustoService: CentroDeCustoService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title) { }
@@ -62,7 +62,7 @@ export class PesquisarCentroDeCustoComponent implements OnInit {
 
         centro.ativo = novoStatus;
         
-        this.toasty.success(`Centro de Custo ${acao} com sucesso!`);
+        this.messageService.add({ severity: 'success', detail:`Centro de Custo ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -80,7 +80,7 @@ export class PesquisarCentroDeCustoComponent implements OnInit {
     this.centroDeCustoService.excluir(centro.codigo)
       .then(() => {
         this.grid.reset();
-        this.toasty.success('Centro de Custo excluído com sucesso!')
+        this.messageService.add({ severity:'success',  detail:'Centro de Custo excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

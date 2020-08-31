@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CentroDeCusto } from 'src/app/core/model';
 import { CentroDeCustoService } from '../centro-de-custo.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
@@ -25,7 +25,7 @@ export class CadastrarCentroDeCustoComponent implements OnInit {
   constructor(
     private centroDeCustoService: CentroDeCustoService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -65,7 +65,7 @@ export class CadastrarCentroDeCustoComponent implements OnInit {
   adicionarCentroDeCusto(form: FormControl){
     this.centroDeCustoService.salvar(this.centroDeCusto)
     .then(() => {
-      this.toasty.success('Centro de Custo cadastrado com sucesso!');
+      this.messageService.add({ severity: 'success', detail:'Centro de Custo cadastrado com sucesso!' });
 
       this.router.navigate(['/centrodecusto']);
     })
@@ -77,7 +77,7 @@ export class CadastrarCentroDeCustoComponent implements OnInit {
     this.centroDeCustoService.atualizar(this.centroDeCusto)
     .then(centro => {
       this.centroDeCusto = centro;
-      this.toasty.success('Centro de Custo atualizado com sucesso!');
+      this.messageService.add({ severity: 'success', detail:'Centro de Custo atualizado com sucesso!' });
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

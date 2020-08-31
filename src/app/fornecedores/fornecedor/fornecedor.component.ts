@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FornecedorService, fornecedorFiltro } from '../fornecedor.service';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/seguranca/auth.service';
@@ -22,7 +22,7 @@ export class FornecedorComponent implements OnInit {
   constructor(
     private fornecedorService: FornecedorService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandle: ErrorHandlerService,
     private title: Title
@@ -62,7 +62,7 @@ export class FornecedorComponent implements OnInit {
       .then(() => {
         console.log("excluido");
         this.grid.reset();
-        this.toasty.success('Fornecedor excluído com sucesso!')
+        this.messageService.add({ severity:'success', detail:'Fornecedor excluído com sucesso!'})
       })
       .catch(erro => this.errorHandle.handle(erro));
   }
@@ -75,7 +75,7 @@ export class FornecedorComponent implements OnInit {
 
         fornecedor.ativo = novoStatus;
         
-        this.toasty.success(`Fornecedor ${acao} com sucesso!`);
+        this.messageService.add({ severity:'success', detail:`Fornecedor ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandle.handle(erro));
   }

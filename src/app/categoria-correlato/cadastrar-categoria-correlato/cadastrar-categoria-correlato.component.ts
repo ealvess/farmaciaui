@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoriaCorrelatoService } from '../categoria-correlato.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import {MessageService} from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { CategoriaCorrelato } from 'src/app/core/model';
@@ -27,7 +27,7 @@ export class CadastrarCategoriaCorrelatoComponent implements OnInit {
     private categoriaService: CategoriaCorrelatoService,
     private auth: AuthService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -67,7 +67,7 @@ export class CadastrarCategoriaCorrelatoComponent implements OnInit {
   adicionarCategoria(form: FormControl){
     this.categoriaService.salvar(this.categoria)
     .then(() => {
-      this.toasty.success('Categoria cadastrada com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Categoria cadastrada com sucesso!' });
 
       this.router.navigate(['/categoriascorrelato']);
     })
@@ -79,7 +79,7 @@ export class CadastrarCategoriaCorrelatoComponent implements OnInit {
     this.categoriaService.atualizar(this.categoria)
     .then(categoria => {
       this.categoria = categoria;
-      this.toasty.success('Categoria atualizada com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Categoria atualizada com sucesso!' });
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

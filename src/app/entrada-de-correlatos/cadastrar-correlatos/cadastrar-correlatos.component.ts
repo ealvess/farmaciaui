@@ -4,7 +4,7 @@ import { FornecedorService } from 'src/app/fornecedores/fornecedor.service';
 import { TiposCorrelatosService } from 'src/app/tipos-de-correlatos/tipos-correlatos.service';
 import { EntradaCorrelatosService } from '../entrada-correlatos.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
@@ -29,7 +29,7 @@ export class CadastrarCorrelatosComponent implements OnInit {
     private correlatoService: TiposCorrelatosService,
     private entradaService: EntradaCorrelatosService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -108,7 +108,7 @@ export class CadastrarCorrelatosComponent implements OnInit {
   adicionarEntrada(form: FormControl){
     this.entradaService.salvar(this.entradaCorrelato)
     .then(() => {
-      this.toasty.success('Entrada de correlato realizada com sucesso!');
+      this.messageService.add({ severity: 'success',  detail:'Entrada de correlato realizada com sucesso!'});
 
       this.router.navigate(['/entradacorrelatos']);
     })
@@ -120,7 +120,7 @@ export class CadastrarCorrelatosComponent implements OnInit {
     this.entradaService.atualizar(this.entradaCorrelato)
     .then(entrada => {
       this.entradaCorrelato = entrada;
-      this.toasty.success('Entrada de correlato atualizada com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Entrada de correlato atualizada com sucesso!'});
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

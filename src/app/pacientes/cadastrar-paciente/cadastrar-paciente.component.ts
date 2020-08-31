@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PacienteService } from '../paciente.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Paciente } from 'src/app/core/model';
@@ -26,7 +26,7 @@ export class CadastrarPacienteComponent implements OnInit {
   constructor(
     private pacienteService: PacienteService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute,
     private router: Router,
     private title: Title
@@ -67,7 +67,7 @@ export class CadastrarPacienteComponent implements OnInit {
   adicionarPaciente(form: FormControl) {
     this.pacienteService.salvar(this.paciente)
       .then(() => {
-        this.toasty.success('Paciente cadastrado com sucesso!');
+        this.messageService.add({ severity:'success', detail:'Paciente cadastrado com sucesso!'});
 
         this.router.navigate(['/pacientes']);
       })
@@ -79,7 +79,7 @@ export class CadastrarPacienteComponent implements OnInit {
     this.pacienteService.atualizar(this.paciente)
       .then(paciente => {
         this.paciente = paciente;
-        this.toasty.success('Paciente atualizado com sucesso!');
+        this.messageService.add({ severity:'success', detail:'Paciente atualizado com sucesso!'});
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro))

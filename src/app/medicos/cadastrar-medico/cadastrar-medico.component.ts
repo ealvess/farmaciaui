@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Medico } from 'src/app/core/model';
 import { MedicosService } from '../medicos.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
@@ -26,7 +26,7 @@ export class CadastrarMedicoComponent implements OnInit {
   constructor(
     private medicoService: MedicosService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -67,7 +67,7 @@ export class CadastrarMedicoComponent implements OnInit {
   adicionarMedico(form: FormControl){
     this.medicoService.salvar(this.medico)
     .then(() => {
-      this.toasty.success('Médico cadastrado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Médico cadastrado com sucesso!'});
 
       this.router.navigate(['/medicos']);
     })
@@ -79,7 +79,7 @@ export class CadastrarMedicoComponent implements OnInit {
     this.medicoService.atualizar(this.medico)
     .then(medico => {
       this.medico = medico;
-      this.toasty.success('Medico atualizado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Medico atualizado com sucesso!'});
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

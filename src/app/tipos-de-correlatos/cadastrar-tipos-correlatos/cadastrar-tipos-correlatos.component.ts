@@ -3,7 +3,7 @@ import { Correlato } from 'src/app/core/model';
 import { CategoriaCorrelatoService } from 'src/app/categoria-correlato/categoria-correlato.service';
 import { TiposCorrelatosService } from '../tipos-correlatos.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
@@ -46,7 +46,7 @@ export class CadastrarTiposCorrelatosComponent implements OnInit {
     private categoriaService: CategoriaCorrelatoService,
     private tiposCorrelatoService: TiposCorrelatosService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -97,7 +97,7 @@ export class CadastrarTiposCorrelatosComponent implements OnInit {
   adicionarTipoCorrelato(form: FormControl){
     this.tiposCorrelatoService.salvar(this.correlato)
     .then(() => {
-      this.toasty.success('Correlato cadastrado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Correlato cadastrado com sucesso!'});
 
       this.router.navigate(['/tiposcorrelatos']);
     })
@@ -109,7 +109,7 @@ export class CadastrarTiposCorrelatosComponent implements OnInit {
     this.tiposCorrelatoService.atualizar(this.correlato)
     .then(correlato => {
       this.correlato = correlato;
-      this.toasty.success('Correlato atualizado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Correlato atualizado com sucesso!'});
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

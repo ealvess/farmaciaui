@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 
 import { FornecedorService } from '../fornecedor.service';
 import { Fornecedor } from '../../core/model';
@@ -26,7 +26,7 @@ export class CadastroFornecedorComponent implements OnInit {
   constructor(
     private fornecedorService: FornecedorService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -66,7 +66,7 @@ export class CadastroFornecedorComponent implements OnInit {
   adicionarFornecedor(form: FormControl){
     this.fornecedorService.salvar(this.fornecedor)
     .then(() => {
-      this.toasty.success('Fornecedor cadastrado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Fornecedor cadastrado com sucesso!'});
 
       //form.reset();
       //this.fornecedor = new Fornecedor();
@@ -80,7 +80,7 @@ export class CadastroFornecedorComponent implements OnInit {
     this.fornecedorService.atualizar(this.fornecedor)
     .then(fornecedor => {
       this.fornecedor = fornecedor;
-      this.toasty.success('Fornecedor atualizado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Fornecedor atualizado com sucesso!'});
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastyService } from 'ng2-toasty';
+import {MessageService} from 'primeng/api';
 import { Router } from '@angular/router';
 import { NotAuthenticatedError } from '../seguranca/farmacia-http-interceptor';
 
@@ -9,7 +9,7 @@ import { NotAuthenticatedError } from '../seguranca/farmacia-http-interceptor';
 export class ErrorHandlerService {
 
   constructor(
-    private toasty: ToastyService,
+    private message: MessageService,
     private router: Router
   ) { }
 
@@ -45,7 +45,7 @@ export class ErrorHandlerService {
       console.error('Ocorreu um erro', errorResponse);
     }
 
-    this.toasty.error(msg);
+    this.message.add({ severity: 'error', detail: msg });
   }
 
 }

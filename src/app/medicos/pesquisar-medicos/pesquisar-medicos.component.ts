@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MedicoFiltro, MedicosService } from '../medicos.service';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
@@ -27,7 +27,7 @@ export class PesquisarMedicosComponent implements OnInit {
   constructor(
     private medicoService: MedicosService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title) { }
@@ -61,7 +61,7 @@ export class PesquisarMedicosComponent implements OnInit {
 
         medico.ativo = novoStatus;
 
-        this.toasty.success(`Médico ${acao} com sucesso!`);
+        this.messageService.add({ severity:'success', detail:`Médico ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -79,7 +79,7 @@ export class PesquisarMedicosComponent implements OnInit {
     this.medicoService.excluir(medico.codigo)
       .then(() => {
         this.grid.reset();
-        this.toasty.success('Médico excluída com sucesso!')
+        this.messageService.add({ severity:'success', detail:'Médico excluída com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

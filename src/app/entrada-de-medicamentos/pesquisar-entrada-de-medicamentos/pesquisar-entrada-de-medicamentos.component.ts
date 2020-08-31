@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, MenuItem, ConfirmationService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { EntradaDeMedicamentoService, EntradaDeMedicamentoFiltro } from '../entrada-de-medicamento.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Table } from 'primeng/table';
 import { AuthService } from 'src/app/seguranca/auth.service';
@@ -24,7 +24,7 @@ export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
   constructor(
     private entradaMedicamentoService: EntradaDeMedicamentoService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title
@@ -72,7 +72,7 @@ export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
       .then(() => {
         console.log("excluido");
         this.grid.reset();
-        this.toasty.success('Entrada de Correlato excluída com sucesso!')
+        this.messageService.add({ severity:'success', detail:'Entrada de Correlato excluída com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

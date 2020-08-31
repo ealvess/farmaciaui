@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SaidaDeMedicamento } from 'src/app/core/model';
 import { SaidaDeMedicamentoService } from '../saida-de-medicamento.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -28,7 +28,7 @@ export class CadastrarSaidaPorPacienteComponent implements OnInit {
     private saidaService: SaidaDeMedicamentoService,
     private pacienteService: PacienteService,
     private entradaMedicamentoService: EntradaDeMedicamentoService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private router: Router,
     private title: Title
@@ -75,7 +75,7 @@ export class CadastrarSaidaPorPacienteComponent implements OnInit {
     
     this.saidaService.salvar(this.saidaPorPaciente)
     .then(() => {
-      this.toasty.success('Saida de medicamento realizada!');
+      this.messageService.add({ severity:'success', detail:'Saida de medicamento realizada!'});
 
       form.reset();
       this.saidaPorPaciente = new SaidaDeMedicamento();

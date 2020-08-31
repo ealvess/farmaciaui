@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CategoriaService } from 'src/app/categorias-de-medicamento/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Medicamento } from 'src/app/core/model';
@@ -47,7 +47,7 @@ export class CadastrarTiposDeMedicamentosComponent implements OnInit {
     private categoriaService: CategoriaService,
     private medicamentoService: TiposDeMedicamentosService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute, 
     private router: Router,
     private title: Title
@@ -98,7 +98,7 @@ export class CadastrarTiposDeMedicamentosComponent implements OnInit {
   adicionarMedicamento(form: FormControl){
     this.medicamentoService.salvar(this.medicamento)
     .then(() => {
-      this.toasty.success('Medicamento cadastrado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Medicamento cadastrado com sucesso!'});
 
       this.router.navigate(['/tiposmedicamentos']);
     })
@@ -110,7 +110,7 @@ export class CadastrarTiposDeMedicamentosComponent implements OnInit {
     this.medicamentoService.atualizar(this.medicamento)
     .then(medicamento => {
       this.medicamento = medicamento;
-      this.toasty.success('Medicamento atualizado com sucesso!');
+      this.messageService.add({ severity:'success', detail:'Medicamento atualizado com sucesso!'});
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro))

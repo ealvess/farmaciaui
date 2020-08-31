@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PacienteFiltro, PacienteService } from '../paciente.service';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
@@ -22,7 +22,7 @@ export class PesquisarPacienteComponent implements OnInit {
 
   constructor(
     private pacienteService: PacienteService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private auth: AuthService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
@@ -62,7 +62,7 @@ export class PesquisarPacienteComponent implements OnInit {
     this.pacienteService.excluir(paciente.codigo)
       .then(() => {
         this.grid.reset();
-        this.toasty.success('Paciente excluído com sucesso!')
+        this.messageService.add({ severity:'success', detail:'Paciente excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

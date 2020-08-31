@@ -3,7 +3,7 @@ import { CategoriaService, CategoriaFiltro } from '../categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/seguranca/auth.service';
 
@@ -20,15 +20,15 @@ export class PesquisarCategoriaComponent implements OnInit {
   @ViewChild('tabela', { static: true }) grid: Table;
 
   status = [
-    {label:'Selecione', value:null},
-    {label:'Ativo', value:true},
-    {label:'Inativo', value:false},
+    { label: 'Selecione', value: null },
+    { label: 'Ativo', value: true },
+    { label: 'Inativo', value: false },
   ]
 
   constructor(
     private categoriaService: CategoriaService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title) { }
@@ -44,7 +44,7 @@ export class PesquisarCategoriaComponent implements OnInit {
     this.categoriaService.pesquisar(this.filtro)
       .then(resultado => {
         this.totalRegistros = resultado.total;
-        this.categorias = resultado.categorias;        
+        this.categorias = resultado.categorias;
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -61,8 +61,8 @@ export class PesquisarCategoriaComponent implements OnInit {
         const acao = novoStatus ? 'ativado' : 'desativado';
 
         categoria.ativo = novoStatus;
-        
-        this.toasty.success(`Categoria ${acao} com sucesso!`);
+
+        this.messageService.add({ severity: 'success', detail:`Categoria ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -80,7 +80,7 @@ export class PesquisarCategoriaComponent implements OnInit {
     this.categoriaService.excluir(categoria.codigo)
       .then(() => {
         this.grid.reset();
-        this.toasty.success('Categoria excluída com sucesso!')
+        this.messageService.add({ severity: 'success', detail:'Categoria excluída com sucesso!' })
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

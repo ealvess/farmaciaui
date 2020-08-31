@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TiposDeCorrelatoFiltro, TiposCorrelatosService } from '../tipos-correlatos.service';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
@@ -23,7 +23,7 @@ export class PesquisarTiposCorrelatosComponent implements OnInit {
   constructor(
     private correlatoService: TiposCorrelatosService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title
@@ -67,7 +67,7 @@ export class PesquisarTiposCorrelatosComponent implements OnInit {
       .then(() => {
         console.log("excluido");
         this.grid.reset();
-        this.toasty.success('Correlato excluído com sucesso!')
+        this.messageService.add({ severity:'success', detail:'Correlato excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -80,7 +80,7 @@ export class PesquisarTiposCorrelatosComponent implements OnInit {
 
         correlato.ativo = novoStatus;
         
-        this.toasty.success(`Correlato ${acao} com sucesso!`);
+        this.messageService.add({ severity:'success', detail:`Correlato ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

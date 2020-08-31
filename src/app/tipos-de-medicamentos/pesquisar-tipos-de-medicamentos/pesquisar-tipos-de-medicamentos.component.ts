@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TiposDeMedicamentoFiltro, TiposDeMedicamentosService } from '../pesquisar-tipos-de-medicamentos.service';
 import { Table } from 'primeng/table';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/seguranca/auth.service';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-pesquisar-tipos-de-medicamentos',
@@ -23,7 +24,7 @@ export class PesquisarTiposDeMedicamentosComponent implements OnInit {
   constructor(
     private medicamentoService: TiposDeMedicamentosService,
     private auth: AuthService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private title: Title
@@ -65,7 +66,7 @@ export class PesquisarTiposDeMedicamentosComponent implements OnInit {
       .then(() => {
         console.log("excluido");
         this.grid.reset();
-        this.toasty.success('Medicamento excluído com sucesso!')
+        this.messageService.add({ severity:'success', detail:'Medicamento excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -78,7 +79,7 @@ export class PesquisarTiposDeMedicamentosComponent implements OnInit {
 
         medicamento.ativo = novoStatus;
         
-        this.toasty.success(`Mediccamento ${acao} com sucesso!`);
+        this.messageService.add({ severity:'success', detail:`Mediccamento ${acao} com sucesso!`});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

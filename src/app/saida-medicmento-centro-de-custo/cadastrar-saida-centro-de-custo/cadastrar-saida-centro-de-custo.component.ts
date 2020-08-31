@@ -3,7 +3,7 @@ import { SaidaDeMedicamentoPorCentroDeCusto } from 'src/app/core/model';
 import { CadastrarSaidaCentroDeCustoService } from '../cadastrar-saida-centro-de-custo.service';
 import { CentroDeCustoService } from 'src/app/centro-de-custo/centro-de-custo.service';
 import { EntradaDeMedicamentoService } from 'src/app/entrada-de-medicamentos/entrada-de-medicamento.service';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -28,7 +28,7 @@ export class CadastrarSaidaCentroDeCustoComponent implements OnInit {
     private saidaService: CadastrarSaidaCentroDeCustoService,
     private centroDeCustoService: CentroDeCustoService,
     private entradaMedicamentoService: EntradaDeMedicamentoService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private router: Router,
     private title: Title
@@ -75,7 +75,7 @@ export class CadastrarSaidaCentroDeCustoComponent implements OnInit {
     
     this.saidaService.salvar(this.saidaPorCentroDeCusto)
     .then(() => {
-      this.toasty.success('Saida de medicamento realizada!');
+      this.messageService.add({ severity:'success', detail:'Saida de medicamento realizada!'});
 
       form.reset();
       this.saidaPorCentroDeCusto = new SaidaDeMedicamentoPorCentroDeCusto();
