@@ -31,6 +31,7 @@ import { SaidaDeMedicamentoService } from '../saida-de-medicamento/saida-de-medi
 import { CadastrarSaidaCentroDeCustoService } from '../saida-medicmento-centro-de-custo/cadastrar-saida-centro-de-custo.service';
 import { CadastrarSaidaDeCorrelatoService } from '../saida-de-correlato-por-centro-de-custo/cadastrar-saida-de-correlato.service';
 import { AuthService } from '../seguranca/auth.service';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 // E por fim, registre o localePt como 'pt-BR'
 registerLocaleData(localePt, 'pt-BR');
@@ -67,6 +68,7 @@ registerLocaleData(localePt, 'pt-BR');
     CadastrarSaidaCentroDeCustoService,
     CadastrarSaidaDeCorrelatoService,
     AuthService,
+    DashboardService,
     Title,
     {
       provide: LOCALE_ID , useValue:'pt-BR'

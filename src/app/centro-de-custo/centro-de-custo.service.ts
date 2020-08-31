@@ -15,7 +15,7 @@ export class CentroDeCustoFiltro {
 })
 export class CentroDeCustoService {
 
-  centroDeCustoUrl: string;
+  centroDeCustoUrl: string; 
 
   constructor(private http: HttpClient) { 
     this.centroDeCustoUrl = `${environment.apiUrl}/centrodecusto`

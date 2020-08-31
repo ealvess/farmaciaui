@@ -21,6 +21,7 @@ import { CentroDeCustoModule } from './centro-de-custo/centro-de-custo.module';
 import { SaidaMedicmentoCentroDeCustoModule } from './saida-medicmento-centro-de-custo/saida-medicmento-centro-de-custo.module';
 import { SaidaDeCorrelatoPorCentroDeCustoModule } from './saida-de-correlato-por-centro-de-custo/saida-de-correlato-por-centro-de-custo.module';
 import { SegurancaModule } from './seguranca/seguranca.module'
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SegurancaModule } from './seguranca/seguranca.module'
     SaidaMedicmentoCentroDeCustoModule,
     SaidaDeCorrelatoPorCentroDeCustoModule,
     SegurancaModule,
+    DashboardModule,
     AppRoutingModule
   ],
   providers: [
