@@ -4,17 +4,23 @@
       <h1>Dashboard</h1>
     </div>
 
-    <div class="ui-g-12 ui-md-6">
-      <p-panel header="Entrada de Medicamentos por mês">
-        <p-chart type="pie" [data]="pieChartData"></p-chart>
+    <div class="ui-g-12">
+      <p-panel header="Qunatidade de entrada de Medicamentos por mês"  [toggleable]="true">
+        <p-chart type="pie" [data]="medicamentoPorMes"></p-chart>
       </p-panel>
     </div>
 
-   <!-- <div class="ui-g-12 ui-md-6">
-      <p-panel header="Entradas de Correlatos por mês">
+    <div class="ui-g-12 ui-g-fluid">
+      <p-panel header="Quantidade de entrada de Correlatos por mês" [collapsed]="true" [toggleable]="true">
+        <p-chart type="pie" [data]="correlatosPorMes"></p-chart>
+      </p-panel>
+    </div>
+
+    <div class="ui-g-12">
+      <p-panel header="Entradas de Medicamentos por dia" [collapsed]="true" [toggleable]="true">
         <p-chart type="line" [data]="lineChartData"></p-chart>
       </p-panel>
-    </div> -->
+    </div>
 
   </div>
 </div>

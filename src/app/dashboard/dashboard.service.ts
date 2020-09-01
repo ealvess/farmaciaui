@@ -9,29 +9,35 @@ import * as moment from 'moment';
 })
 export class DashboardService {
 
-  entradaUrl: string;
+  entradaMedicamentoUrl: string;
+  entradaCorrelatoUrl: string;
 
-  constructor(private http: HttpClient) { 
-    this.entradaUrl = `${environment.apiUrl}/entradamedicamentos`
+  constructor(private http: HttpClient) {
+    this.entradaMedicamentoUrl = `${environment.apiUrl}/entradamedicamentos`;
+    this.entradaCorrelatoUrl = `${environment.apiUrl}/entradacorrelatos`;
   }
 
   EntradasDeMedicamentoPorMedicamento(): Promise<Array<any>> {
-    return this.http.get(`${this.entradaUrl}/estatisticas/por-medicamento`)
+    return this.http.get(`${this.entradaMedicamentoUrl}/estatisticas/por-medicamento`)
       .toPromise()
       .then(response => response as Array<any>);
   }
 
   EntradasDeMedicamentoPorDia(): Promise<Array<any>> {
-    return this.http.get(`${this.entradaUrl}/estatisticas/por-dia`)
+    return this.http.get<Array<any>>(`${this.entradaMedicamentoUrl}/estatisticas/por-dia`)
       .toPromise()
       .then(response => {
-        console.log('dados', response);
-        
-        const dados = response['content'];
+        const dados = response;
         this.converterStringsParaDatas(dados);
 
         return dados;
       });
+  }
+
+  EntradasDeCorrelatoPorMes(): Promise<Array<any>> {
+    return this.http.get(`${this.entradaCorrelatoUrl}/estatisticas/por-mes`)
+      .toPromise()
+      .then(response => response as Array<any>);
   }
 
   private converterStringsParaDatas(dados: Array<any>) {

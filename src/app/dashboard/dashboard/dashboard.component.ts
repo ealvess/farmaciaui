@@ -8,26 +8,31 @@ import { DashboardService } from '../dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  pieChartData: any;
+  medicamentoPorMes: any;
+  correlatosPorMes: any;
   lineChartData: any;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.configurarGraficoPizza();
+    this.configurarGraficoPizzaMedicamento();
     this.configurarGraficoLinha();
+    this.configurarGraficoPizzaCorrelato();
   }
 
-  configurarGraficoPizza() {
+  configurarGraficoPizzaMedicamento() {
     this.dashboardService.EntradasDeMedicamentoPorMedicamento()
-      .then(dados => {        
-        this.pieChartData = {
+      .then(dados => {
+        this.medicamentoPorMes = {
           labels: dados.map(dado => dado.medicamento.nome),
           datasets: [
             {
               data: dados.map(dado => dado.quantidade),
               backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
-                                  '#DD4477', '#3366CC', '#DC3912']
+                '#DD4477', '#3366CC', '#DC3912', '#be0027', '#ffdd00', '#279b37', '#52325d',
+                '#00a78e', '#0cb9c1', '##ff9933', '#b4a996', '#000000', '#00395d', '#0033a1',
+                '#84754e', '#f9e498', '#ff7243', '#ff4816', '#f65a5b', '#d2ea32', '#2db928',
+                '#30660f', '#ae9a64', '#606061', '#a3a7a6', '#ff0092', '#cd595a', '#ffaaaa']
             }
           ]
         };
@@ -38,19 +43,49 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.EntradasDeMedicamentoPorDia()
       .then(dados => {
         console.log('grafico dias', dados);
+        const diasDoMes = this.configurarDiasMes();
+        const totaisMedicamentos = this.totaisPorCadaDiaMes(dados.filter(
+          dado => dado.medicamento.nome === 'HEXOMEDINE'), diasDoMes);
+        const totaisMedicamentoss = this.totaisPorCadaDiaMes(dados.filter(
+          dado => dado.medicamento.nome === 'DIPIRONA 500MG'), diasDoMes);
+        console.log('teste', totaisMedicamentos);
 
         this.lineChartData = {
-          labels: dados.map(dado => dado.medicamento.nome),
+          labels: diasDoMes,
           datasets: [
             {
-              data: dados.map(dado => dado.quantidade),
-              borderColor: '#3366CC'
-            }, {
-              data: dados.map(dado => dado.quantidade),
-              borderColor: '#D62B00'
+              label: 'HEXO',
+              data: totaisMedicamentos,
+              backgroundColor: '#42A5F5',
+              borderColor: '#1E88E5',
+            },
+            {
+              label: 'DIPI',
+              data: totaisMedicamentoss,
+              backgroundColor: '#9CCC65',
+              borderColor: '#7CB342',
             }
           ]
         }
+      });
+  }
+
+  configurarGraficoPizzaCorrelato() {
+    this.dashboardService.EntradasDeCorrelatoPorMes()
+      .then(dados => {
+        this.correlatosPorMes = {
+          labels: dados.map(dado => dado.correlato.nome),
+          datasets: [
+            {
+              data: dados.map(dado => dado.quantidade),
+              backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
+                '#DD4477', '#3366CC', '#DC3912', '#be0027', '#ffdd00', '#279b37', '#52325d',
+                '#00a78e', '#0cb9c1', '##ff9933', '#b4a996', '#000000', '#00395d', '#0033a1',
+                '#84754e', '#f9e498', '#ff7243', '#ff4816', '#f65a5b', '#d2ea32', '#2db928',
+                '#30660f', '#ae9a64', '#606061', '#a3a7a6', '#ff0092', '#cd595a', '#ffaaaa']
+            }
+          ]
+        };
       });
   }
 
