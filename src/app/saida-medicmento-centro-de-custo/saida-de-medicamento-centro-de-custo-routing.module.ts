@@ -10,13 +10,13 @@ const routes: Routes = [
     path: 'saidamedicamentocentrodecusto', 
     component: PesquisarSaidaCentroDeCustoComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_PESQUISAR_SAIDA_DE_MEDICAMENTO'] }
+    data: { roles: ['ROLE_PESQUISAR_ITEM_SAIDA_MEDICAMENTO'] }
    },
   { 
     path: 'saidamedicamentocentrodecusto/novo', 
     component: CadastrarSaidaCentroDeCustoComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_CADASTRAR_SAIDA_DE_MEDICAMENTO'] }
+    data: { roles: ['ROLE_CADASTRAR_ITEM_SAIDA_MEDICAMENTO'] }
   },
 ];
 

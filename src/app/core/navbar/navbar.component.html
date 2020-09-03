@@ -23,7 +23,7 @@
     <li class="navbar-menuitem" routerLinkActive="ativo"
     *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_CORRELATO')"><a routerLink="/entradacorrelatos">Correlatos</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_CORRELATO')"><a routerLink="/dashboard">Dashboard</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/dashboard">Dashboard</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"><a href="javascript:;" (click)="logout()">Sair</a></li>
   </ul>
 </nav>

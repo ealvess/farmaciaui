@@ -11,13 +11,13 @@ const routes: Routes = [
     path: 'saidacorrelatoporcentrodecusto',
     component: PesquisarSaidaDeCorrelatoComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_PESQUISAR_SAIDA_DE_CORRELATO'] }
+    data: { roles: ['ROLE_PESQUISAR_ITEM_SAIDA_CORRELATO'] }
   },
   {
     path: 'saidacorrelatoporcentrodecusto/novo',
     component: CadastrarSaidaDeCorrelatoComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_CADASTRAR_SAIDA_DE_CORRELATO'] }
+    data: { roles: ['ROLE_CADASTRAR_ITEM_SAIDA_CORRELATO'] }
   },
 ];
 

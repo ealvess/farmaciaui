@@ -10,13 +10,13 @@ const routes: Routes = [
     path: 'saidamedicamento',
     component: PesquisarSaidaComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_PESQUISAR_SAIDA_DE_MEDICAMENTO'] }
+    data: { roles: ['ROLE_PESQUISAR_ITEM_SAIDA_MEDICAMENTO'] }
   },
   {
     path: 'saidamedicamento/novo',
     component: CadastrarSaidaPorPacienteComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_CADASTRAR_SAIDA_DE_MEDICAMENTO'] }
+    data: { roles: ['ROLE_CADASTRAR_ITEM_SAIDA_MEDICAMENTO'] }
   },
 ];
 
