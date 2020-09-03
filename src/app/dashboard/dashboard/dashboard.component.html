@@ -5,8 +5,22 @@
     </div>
 
     <div class="ui-g-12">
-      <p-panel header="Qunatidade de entrada de Medicamentos por mês"  [toggleable]="true">
+      <p-panel header="Quantidade de entrada de Medicamentos por mês" [toggleable]="true">
         <p-chart type="pie" [data]="medicamentoPorMes"></p-chart>
+      </p-panel>
+    </div>
+
+    <div class="ui-g-12 ui-g-fluid">
+      <p-panel header="Quantidade de saida de medicamentos para pacientes no mês" [collapsed]="true"
+        [toggleable]="true">
+        <p-chart type="pie" [data]="saidaPacientes"></p-chart>
+      </p-panel>
+    </div>
+
+    <div class="ui-g-12 ui-g-fluid">
+      <p-panel header="Quantidade de saida de medicamentos para centro de custo no mês" [collapsed]="true"
+        [toggleable]="true">
+        <p-chart type="pie" [data]="saidaCentroDeCusto"></p-chart>
       </p-panel>
     </div>
 
@@ -16,9 +30,9 @@
       </p-panel>
     </div>
 
-    <div class="ui-g-12">
-      <p-panel header="Entradas de Medicamentos por dia" [collapsed]="true" [toggleable]="true">
-        <p-chart type="line" [data]="lineChartData"></p-chart>
+    <div class="ui-g-12 ui-g-fluid">
+      <p-panel header="Quantidade de saida de Correlatos por mês" [collapsed]="true" [toggleable]="true">
+        <p-chart type="pie" [data]="saidaCorrelatosPorMes"></p-chart>
       </p-panel>
     </div>
 
