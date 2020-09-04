@@ -78,11 +78,7 @@ export class PesquisarMedicosComponent implements OnInit {
   excluir(medico: any) {
     this.medicoService.excluir(medico.codigo)
       .then(() => {
-        if (this.grid.first === 0) {
-          this.pesquisar();
-        } else {
-          this.grid.first = 0;
-        }
+        this.grid.reset();
         this.messageService.add({ severity:'success', detail:'Médico excluída com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));

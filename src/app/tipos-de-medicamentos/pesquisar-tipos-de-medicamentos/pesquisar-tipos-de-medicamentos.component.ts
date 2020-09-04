@@ -64,11 +64,7 @@ export class PesquisarTiposDeMedicamentosComponent implements OnInit {
   excluir(medicamento: any) {
     this.medicamentoService.excluir(medicamento.codigo)
       .then(() => {
-        if (this.grid.first === 0) {
-          this.pesquisar();
-        } else {
-          this.grid.first = 0;
-        }
+        this.grid.reset();
         this.messageService.add({ severity:'success', detail:'Medicamento excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));

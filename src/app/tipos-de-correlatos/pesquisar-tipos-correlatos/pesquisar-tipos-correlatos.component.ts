@@ -65,11 +65,7 @@ export class PesquisarTiposCorrelatosComponent implements OnInit {
   excluir(correlato: any) {
     this.correlatoService.excluir(correlato.codigo)
       .then(() => {
-        if (this.grid.first === 0) {
-          this.pesquisar();
-        } else {
-          this.grid.first = 0;
-        }
+        this.grid.reset();
         this.messageService.add({ severity:'success', detail:'Correlato excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));

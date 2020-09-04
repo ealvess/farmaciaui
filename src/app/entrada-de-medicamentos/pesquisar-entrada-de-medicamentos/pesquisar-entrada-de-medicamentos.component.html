@@ -32,7 +32,7 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <p-table [value]="medicamentos" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina"
-        [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+        [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
         <ng-template pTemplate="header">
           <tr>
             <th class="col-codigo-header">CODIGO</th>

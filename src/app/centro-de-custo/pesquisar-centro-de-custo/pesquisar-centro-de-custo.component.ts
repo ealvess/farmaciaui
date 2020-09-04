@@ -79,11 +79,7 @@ export class PesquisarCentroDeCustoComponent implements OnInit {
   excluir(centro: any) {
     this.centroDeCustoService.excluir(centro.codigo)
       .then(() => {
-        if (this.grid.first === 0) {
-          this.pesquisar();
-        } else {
-          this.grid.first = 0;
-        }
+        this.grid.reset();
         this.messageService.add({ severity:'success',  detail:'Centro de Custo excluído com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
