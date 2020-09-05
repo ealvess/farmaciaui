@@ -1,7 +1,7 @@
 <div class="container">
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
-    <div class="ui-g">
+    <div class="ui-g" id="contentToConvert">
       <div class="ui-g-12">
         <h1>{{ editando ? 'Edição de' : 'Novo' }} Fornecedor</h1>
       </div>
@@ -112,13 +112,13 @@
 
         <app-message [control]="ativo" error="required" text="Selecione uma opção"></app-message>
       </div>
-
-      <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
-        <a [routerLink]="['/fornecedores']">Voltar para pesquisa</a>
-      </div>
     </div>
 
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+      <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
+      <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
+      <a [routerLink]="['/fornecedores']">Voltar para pesquisa</a>
+    </div>
   </form>
 </div>

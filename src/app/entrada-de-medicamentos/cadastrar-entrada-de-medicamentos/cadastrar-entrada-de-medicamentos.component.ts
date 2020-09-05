@@ -1,13 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+
+import { MessageService } from 'primeng/api';
+
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+
 import { FornecedorService } from 'src/app/fornecedores/fornecedor.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { TiposDeMedicamentosService } from 'src/app/tipos-de-medicamentos/pesquisar-tipos-de-medicamentos.service';
-import { MessageService } from 'primeng/api';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { EntradaMedicamento } from 'src/app/core/model';
 import { EntradaDeMedicamentoService } from '../entrada-de-medicamento.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastrar-entrada-de-medicamentos',
@@ -76,9 +81,7 @@ export class CadastrarEntradaDeMedicamentosComponent implements OnInit {
     return this.medicamentoService.listarTodos()
       .then(medicamentos => {
         this.medicamentos = medicamentos.map(med =>  
-          ({ label: med.nome, value: med.codigo }));
-          console.log(this.medicamentos);
-          
+          ({ label: med.nome, value: med.codigo }));          
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -138,6 +141,21 @@ export class CadastrarEntradaDeMedicamentosComponent implements OnInit {
 
   atualizarTituloEdicao(){
     this.title.setTitle(`Edição de entrada: ${this.entradaMedicamento.medicamento.nome}`)
+  }
+
+  generatePDF(form: FormControl) {
+    var data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('farmacia.pdf');
+    });
+
+    form.markAsUntouched();
   }
 
 }

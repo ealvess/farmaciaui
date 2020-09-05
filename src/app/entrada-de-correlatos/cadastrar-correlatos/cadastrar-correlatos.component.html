@@ -1,7 +1,7 @@
 <div class="container">
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
-    <div class="ui-g">
+    <div class="ui-g" id="contentToConvert">
       <div class="ui-g-12">
         <h1>{{ editando ? 'Edição de' : 'Nova' }} Entrada de Correlato</h1>
       </div>
@@ -57,6 +57,7 @@
         <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-success" 
         [routerLink]="['/entradacorrelatos/novo']" style="margin: 5px;"></button>
+        <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
         <a [routerLink]="['/entradacorrelatos']">Voltar para pesquisa</a>
       </div>
     </div>

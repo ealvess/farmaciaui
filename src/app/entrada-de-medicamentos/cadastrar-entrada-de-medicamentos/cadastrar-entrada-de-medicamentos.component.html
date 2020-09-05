@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" >
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
-    <div class="ui-g">
+    <div class="ui-g" id="contentToConvert">
       <div class="ui-g-12">
         <h1>{{ editando ? 'Edição de' : 'Nova' }} Entrada de Medicamento</h1>
       </div>
@@ -51,15 +51,17 @@
         <input pInputText type="text" placeholder="0,0" name="valorUnitario"
         [(ngModel)]="entradaMedicamento.valorUnitario" #valorUnitario="ngModel" required>
       </div>
-     
-
-      <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-success" 
-        (click)="novo(f)" style="margin: 5px;"></button>
-        <a [routerLink]="['/entradamedicamentos']">Voltar para pesquisa</a>
-      </div>
+    
+      
     </div>
 
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+      <button pButton type="button" label="Novo" class="ui-button-success" 
+      (click)="novo(f)" style="margin: 5px;"></button>
+      <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
+      <a [routerLink]="['/entradamedicamentos']" style="margin: 5px;">Voltar para pesquisa</a>
+
+    </div>
   </form>
 </div>

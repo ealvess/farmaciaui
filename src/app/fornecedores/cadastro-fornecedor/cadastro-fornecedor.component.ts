@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 import { MessageService } from 'primeng/api';
 
 import { FornecedorService } from '../fornecedor.service';
 import { Fornecedor } from '../../core/model';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-cadastro-fornecedor',
@@ -98,6 +102,21 @@ export class CadastroFornecedorComponent implements OnInit {
 
   atualizarTituloEdicao(){
     this.title.setTitle(`Edição de fornecedores: ${this.fornecedor.nomeFantasia}`)
+  }
+
+  generatePDF(form: FormControl) {
+    var data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('farmacia.pdf');
+    });
+
+    form.markAsUntouched();
   }
 
 }

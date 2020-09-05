@@ -31,7 +31,7 @@ export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Entrada de Medicamentos');
+    this.title.setTitle('Estoque de Medicamentos');
     this.localizacaoCalendar();
 
     this.items = [
@@ -71,7 +71,7 @@ export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
     this.entradaMedicamentoService.excluir(correlato.codigo)
       .then(() => {
         this.grid.reset();
-        this.messageService.add({ severity:'success', detail:'Entrada de Correlato excluída com sucesso!'})
+        this.messageService.add({ severity:'success', detail:'Entrada de Medicamento excluída com sucesso!'})
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

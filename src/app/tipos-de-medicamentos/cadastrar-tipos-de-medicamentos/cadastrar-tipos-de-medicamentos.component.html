@@ -1,7 +1,7 @@
 <div class="container">
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
 
-    <div class="ui-g">
+    <div class="ui-g" id="contentToConvert">
       <div class="ui-g-12">
         <h1>{{ editando ? 'Edição de' : 'Novo' }} Medicamento</h1>
       </div>
@@ -37,13 +37,13 @@
         <p-dropdown [options]="status"  placeholder="Selecione" name="ativo"
         [(ngModel)]="medicamento.ativo" #ativo="ngModel" required></p-dropdown>
       </div>
-      
-      <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
-        <button pButton type="button" label="Novo Cadastro" class="ui-button-success" style="margin: 5px;" (click)="novo(f)" ></button>
-        <button pButton type="button" label="Voltar para pesquisa" class="ui-button-success" style="margin: 5px;" routerLink="/tiposmedicamentos"></button>
-      </div>
     </div>
 
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+      <button pButton type="button" label="Novo Cadastro" class="ui-button-success" style="margin: 5px;" (click)="novo(f)" ></button>
+      <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
+      <button pButton type="button" label="Voltar para pesquisa" class="ui-button-success" style="margin: 5px;" routerLink="/tiposmedicamentos"></button>
+    </div>
   </form>
 </div>

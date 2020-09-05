@@ -1,11 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CategoriaCorrelatoService } from '../categoria-correlato.service';
-import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import {MessageService} from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { CategoriaCorrelato } from 'src/app/core/model';
 import { FormControl } from '@angular/forms';
+
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+
+import {MessageService} from 'primeng/api';
+
+import { CategoriaCorrelatoService } from '../categoria-correlato.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { CategoriaCorrelato } from 'src/app/core/model';
 import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
@@ -97,5 +102,20 @@ export class CadastrarCategoriaCorrelatoComponent implements OnInit {
 
   atualizarTituloEdicao(){
     this.title.setTitle(`Edição de categoria: ${this.categoria.nome}`)
+  }
+
+  generatePDF(form: FormControl) {
+    var data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('farmacia.pdf');
+    });
+
+    form.markAsUntouched();
   }
 }

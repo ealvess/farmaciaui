@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { FormControl } from '@angular/forms';
+
+import { MessageService } from 'primeng/api';
+
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+
 import { SaidaDeMedicamentoPorCentroDeCusto } from 'src/app/core/model';
 import { CadastrarSaidaCentroDeCustoService } from '../cadastrar-saida-centro-de-custo.service';
 import { CentroDeCustoService } from 'src/app/centro-de-custo/centro-de-custo.service';
 import { EntradaDeMedicamentoService } from 'src/app/entrada-de-medicamentos/entrada-de-medicamento.service';
-import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-cadastrar-saida-centro-de-custo',
@@ -93,6 +99,21 @@ export class CadastrarSaidaCentroDeCustoComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/saidamedicamentocentrodecusto/novo']);
+  }
+
+  generatePDF(form: FormControl) {
+    var data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('farmacia.pdf');
+    });
+
+    form.markAsUntouched();
   }
 
   localizacaoCalendar() {
