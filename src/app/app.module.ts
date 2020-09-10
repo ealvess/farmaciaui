@@ -22,6 +22,7 @@ import { SaidaMedicmentoCentroDeCustoModule } from './saida-medicmento-centro-de
 import { SaidaDeCorrelatoPorCentroDeCustoModule } from './saida-de-correlato-por-centro-de-custo/saida-de-correlato-por-centro-de-custo.module';
 import { SegurancaModule } from './seguranca/seguranca.module'
 import { DashboardModule } from './dashboard/dashboard.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SaidaDeCorrelatoPorCentroDeCustoModule,
     SegurancaModule,
     DashboardModule,
+    UsuarioModule,
     AppRoutingModule
   ],
   providers: [

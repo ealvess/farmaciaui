@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -19,7 +19,7 @@ import { PacienteService } from '../pacientes/paciente.service';
 import { EntradaCorrelatosService } from '../entrada-de-correlatos/entrada-correlatos.service';
 
 
-import {ConfirmationService} from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
@@ -33,7 +33,7 @@ import { CadastrarSaidaCentroDeCustoService } from '../saida-medicmento-centro-d
 import { CadastrarSaidaDeCorrelatoService } from '../saida-de-correlato-por-centro-de-custo/cadastrar-saida-de-correlato.service';
 import { AuthService } from '../seguranca/auth.service';
 import { DashboardService } from '../dashboard/dashboard.service';
-
+import { UsuarioService } from '../usuario/usuario.service';
 // E por fim, registre o localePt como 'pt-BR'
 registerLocaleData(localePt, 'pt-BR');
 
@@ -49,12 +49,12 @@ registerLocaleData(localePt, 'pt-BR');
     ConfirmDialogModule,
     ToastModule
   ],
-  exports:[
+  exports: [
     NavbarComponent,
     ToastModule,
     ConfirmDialogModule
   ],
-  providers:[
+  providers: [
     FornecedorService,
     EntradaDeMedicamentoService,
     EntradaCorrelatosService,
@@ -70,9 +70,10 @@ registerLocaleData(localePt, 'pt-BR');
     CadastrarSaidaDeCorrelatoService,
     AuthService,
     DashboardService,
+    UsuarioService,
     Title,
     {
-      provide: LOCALE_ID , useValue:'pt-BR'
+      provide: LOCALE_ID, useValue: 'pt-BR'
     },
     ErrorHandlerService,
     MessageService

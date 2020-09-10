@@ -147,3 +147,18 @@ export class SaidaDeCorrelato{
 	total: number;
 	entradaCorrelato = new EntradaCorrelato();
 }
+
+export class Permissao{
+	codigo:number;
+	descricao: string;
+}
+
+export class Usuario{
+	codigo: number;
+	nome: String;
+	email: string;
+	senha: string;
+	tipo: string;
+	ativo: boolean;
+	permissoes: any[];
+}
