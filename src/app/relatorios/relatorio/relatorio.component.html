@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Relatórios</h1>
+    </div>
+
+    <div class="ui-g-6">
+      <p-panel header="Entrada de Medicamentos por mês" [toggleable]="true">
+          <form #f="ngForm" (ngSubmit)="quantidadeEntradaDeMedicamentosMes()">
+            <div class="ui-g-12">
+              <label>Entrada de</label>
+              <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000"
+               required [inputStyle]="{ 'width': '95px'}" [(ngModel)]="periodoInicioMed"
+                name="periodoInicioMed"></p-calendar>
+  
+              <label>até</label>
+  
+              <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000"
+               required [inputStyle]="{ 'width': '95px'}" [(ngModel)]="periodoFimMed"
+                name="periodoFimMed"></p-calendar>
+            </div>
+  
+            <div class="ui-g-12">
+              <button pButton type="submit" label="Gerar Relatorio" [disabled]="f.invalid"></button>
+            </div>
+          </form>
+      </p-panel>
+    </div>
+
+    <div class="ui-g-6">
+      <p-panel header="Entrada de Correlatos por mês" [toggleable]="true">
+        <form #f="ngForm" (ngSubmit)="quantidadeEntradaDeCorrelatosMes()">
+          <div class="ui-g-12">
+            <label>Entrada de</label>
+            <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000"
+            required [inputStyle]="{ 'width': '95px'}" [(ngModel)]="periodoInicio"
+              name="periodoInicio"></p-calendar>
+
+            <label>até</label>
+
+            <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000"
+             required [inputStyle]="{ 'width': '95px'}" [(ngModel)]="periodoFim"
+              name="periodoFim"></p-calendar>
+          </div>
+
+          <div class="ui-g-12">
+            <button pButton type="submit" label="Gerar Relatorio" [disabled]="f.invalid"></button>
+          </div>
+        </form>
+      </p-panel>
+    </div>
+  </div>
+</div>

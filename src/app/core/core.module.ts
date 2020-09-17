@@ -34,7 +34,10 @@ import { CadastrarSaidaDeCorrelatoService } from '../saida-de-correlato-por-cent
 import { AuthService } from '../seguranca/auth.service';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { UsuarioService } from '../usuario/usuario.service';
+import { RelatoriosService } from '../relatorios/relatorios.service'
+
 // E por fim, registre o localePt como 'pt-BR'
+
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
@@ -71,6 +74,7 @@ registerLocaleData(localePt, 'pt-BR');
     AuthService,
     DashboardService,
     UsuarioService,
+    RelatoriosService,
     Title,
     {
       provide: LOCALE_ID, useValue: 'pt-BR'

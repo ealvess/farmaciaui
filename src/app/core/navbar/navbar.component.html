@@ -26,6 +26,8 @@
     *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_CORRELATO')"><a routerLink="/entradacorrelatos">Correlatos</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
     *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/dashboard">Estatisticas</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/relatorios">Relatorios</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"><a href="javascript:;" (click)="logout()">Sair</a></li>
   </ul>
 </nav>

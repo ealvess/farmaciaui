@@ -23,6 +23,7 @@ import { SaidaDeCorrelatoPorCentroDeCustoModule } from './saida-de-correlato-por
 import { SegurancaModule } from './seguranca/seguranca.module'
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { RelatoriosModule } from './relatorios/relatorios.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     SegurancaModule,
     DashboardModule,
     UsuarioModule,
+    RelatoriosModule,
     AppRoutingModule
   ],
   providers: [
