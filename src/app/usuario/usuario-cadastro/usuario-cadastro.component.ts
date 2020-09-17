@@ -90,8 +90,7 @@ export class UsuarioCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  adicionarUsuario(form: FormControl) {
- 
+  verificarTipoUsuario(usuario:any){
     if(this.usuario.tipo === 'farmaceutico'){
       this.usuario.permissoes = this.permissoes;
     }
@@ -104,7 +103,11 @@ export class UsuarioCadastroComponent implements OnInit {
         {codigo:18},{codigo:19},{codigo:22},{codigo:25},{codigo:28},{codigo:31},{codigo:34}
       ];
     }
+    return usuario;
+  }
 
+  adicionarUsuario(form: FormControl) {
+    this.verificarTipoUsuario(form);
     console.log('permissoes', this.usuario.permissoes);
     console.log('usuer',this.usuario);
     this.usuarioService.salvar(this.usuario)
