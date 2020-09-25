@@ -62,6 +62,17 @@ export class UsuarioService {
 
   }
 
+  cadastrar(usuario: Usuario): Promise<Usuario> {
+    const headers = new HttpHeaders();
+    headers.append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post<Usuario>(
+      `${this.usuariosUrl}/cadastrar`, usuario, {headers})
+      .toPromise();
+
+  }
+
   atualizar(usuario: Usuario): Promise<any> {
     return this.http.put<Usuario>(`${this.usuariosUrl}/${usuario.codigo}`, usuario)
       .toPromise()

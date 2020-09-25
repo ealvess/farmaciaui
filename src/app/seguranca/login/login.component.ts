@@ -29,9 +29,4 @@ export class LoginComponent{
     
   }
 
-  handleClick(event: Event) { 
-    console.log('Click!', event) 
-    this.router.navigate(['/novousuario'])
-  } 
-
 }

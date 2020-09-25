@@ -7,7 +7,7 @@ import { NaoAutorizadoComponent } from './core/nao-autorizado.component';
 const routes: Routes = [
 
   { path: 'relatorios', loadChildren: 'app/relatorios/relatorios.module#RelatoriosModule' },
-
+  
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NaoAutorizadoComponent },
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },

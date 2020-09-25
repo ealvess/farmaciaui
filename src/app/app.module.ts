@@ -24,6 +24,7 @@ import { SegurancaModule } from './seguranca/seguranca.module'
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { RelatoriosModule } from './relatorios/relatorios.module';
+import { CriarContaModule } from './criar-conta/criar-conta.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { RelatoriosModule } from './relatorios/relatorios.module';
     DashboardModule,
     UsuarioModule,
     RelatoriosModule,
+    CriarContaModule,
     AppRoutingModule
   ],
   providers: [

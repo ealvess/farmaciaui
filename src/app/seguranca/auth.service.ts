@@ -24,6 +24,7 @@ export class AuthService {
   }
 
   login(usuario: string, senha: string): Promise<void> {
+    
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/x-www-form-urlencoded')
       .append('Authorization', 'Basic YW5ndWxhcjokMmEkMTAkVXRTM0lhYnZuTlNUR3g3ZnpEb0pxTzRMZ1lFN0wuUm1nYzZTVll1TmpYWWNHUVJNd00wZmU=');
@@ -63,6 +64,7 @@ export class AuthService {
         return Promise.resolve(null);
       })
       .catch(response => {
+
         console.error('Erro ao renovar token.', response);
         return Promise.resolve(null);
       });

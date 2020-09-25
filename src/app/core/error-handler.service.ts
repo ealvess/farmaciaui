@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import {MessageService} from 'primeng/api';
 import { Router } from '@angular/router';
 import { NotAuthenticatedError } from '../seguranca/farmacia-http-interceptor';
@@ -9,7 +10,7 @@ import { NotAuthenticatedError } from '../seguranca/farmacia-http-interceptor';
 export class ErrorHandlerService {
 
   constructor(
-    private message: MessageService,
+    private messageService: MessageService,
     private router: Router
   ) { }
 
@@ -23,9 +24,8 @@ export class ErrorHandlerService {
       msg = 'Sua sessão expirou!';
       this.router.navigate(['/login']);
 
-    } else if (errorResponse instanceof Response
+    } else if (errorResponse instanceof HttpErrorResponse
         && errorResponse.status >= 400 && errorResponse.status <= 499) {
-      let errors;
       msg = 'Ocorreu um erro ao processar a sua solicitação';
 
       if (errorResponse.status === 403) {
@@ -33,9 +33,7 @@ export class ErrorHandlerService {
       }
 
       try {
-        errors = errorResponse.json();
-
-        msg = errors[0].mensagemUsuario;
+        msg = errorResponse.error[0].mensagemUsuario;
       } catch (e) { }
 
       console.error('Ocorreu um erro', errorResponse);
@@ -45,7 +43,8 @@ export class ErrorHandlerService {
       console.error('Ocorreu um erro', errorResponse);
     }
 
-    this.message.add({ severity: 'error', detail: msg });
+    this.messageService.add({ severity: 'error', detail: msg });
   }
+
 
 }
