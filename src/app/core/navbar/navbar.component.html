@@ -11,11 +11,11 @@
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario">{{ auth.jwtPayload?.nome }}</li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')"><a routerLink="/usuario">Usuario</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')"><a routerLink="/usuario">Usuarios</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_MEDICO')"><a routerLink="/medicos">Médico</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_MEDICO')"><a routerLink="/medicos">Médicos</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_PACIENTE')"><a routerLink="/pacientes">Paciente</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_PACIENTE')"><a routerLink="/pacientes">Pacientes</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
     *ngIf="auth.temPermissao('ROLE_PESQUISAR_FORNECEDOR')"><a routerLink="/fornecedores">Fornecedores</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"

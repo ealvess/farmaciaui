@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {TabMenuModule} from 'primeng/tabmenu';
-import {MenuItem} from 'primeng/api';
 
 import { PesquisarSaidaComponent } from './pesquisar-saida/pesquisar-saida.component';
 import { SaidaDeMedicamentoRoutingModule } from './saida-de-medicamento-routing.module';
 import { CadastrarSaidaPorPacienteComponent } from './cadastrar-saida-por-paciente/cadastrar-saida-por-paciente.component';
+import { SharedModule } from '../shared/shared.module';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,6 +24,7 @@ import { DialogModule } from 'primeng/dialog';
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
 
     InputTextModule,
     ButtonModule,

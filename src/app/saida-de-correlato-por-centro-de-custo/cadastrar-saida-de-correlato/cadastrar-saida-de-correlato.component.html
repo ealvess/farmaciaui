@@ -11,6 +11,8 @@
         <p-dropdown [options]="centrodeCusto" [filter]="true" placeholder="Selecione" 
         name="centroDeCusto" [(ngModel)]="saidaPorCentroDeCusto.centroDeCusto.codigo" #centroDeCusto="ngModel" required ></p-dropdown>
 
+        <app-message [control]="centroDeCusto" error="required" text="Selecione uma opção"></app-message>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Correlato</label>
@@ -18,16 +20,21 @@
         name="entradaCorrelato" [(ngModel)]="saidaPorCentroDeCusto.entradaCorrelato.codigo" #entradaCorrelato="ngModel" 
         (click)="pegarValores(saidaPorCentroDeCusto.entradaCorrelato.codigo)" required ></p-dropdown>
 
+        <app-message [control]="entradaCorrelato" error="required" text="Selecione um correlato"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Data Saida</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="dataSaida" [(ngModel)]="saidaPorCentroDeCusto.dataSaida" #dataSaida="ngModel" required></p-calendar>
+
+        <app-message [control]="dataSaida" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Quantidade</label>
         <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade" 
-        [(ngModel)]="saidaPorCentroDeCusto.quantidade" #quantidade="ngModel">
+        [(ngModel)]="saidaPorCentroDeCusto.quantidade" #quantidade="ngModel" required>
+
+        <app-message [control]="quantidade" error="required" text="Informe a quantidade"></app-message>
       </div>
     </div>
 

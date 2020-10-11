@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,10 @@ export class DashboardComponent implements OnInit {
   saidaCorrelatosPorMes:any;
   lineChartData: any;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private title: Title
+    ) { }
 
   ngOnInit() {
     this.configurarGraficoPizzaEntradaMedicamento();
@@ -23,6 +27,7 @@ export class DashboardComponent implements OnInit {
     this.configurarGraficoPizzaSaidaMedicamentoParaCentroDeCustoPorMes();
     this.configurarGraficoPizzaCorrelato();
     this.configurarGraficoPizzaSaidaCorrelato();
+    this.title.setTitle('Estatisticas');
   }
 
   configurarGraficoPizzaEntradaMedicamento() {

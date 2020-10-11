@@ -12,17 +12,12 @@ export class NovoUsuarioService {
   usuariosUrl: string;
 
   constructor(private http: HttpClient) {
-    this.usuariosUrl = `${environment.apiUrl}/cadastrar`
+    this.usuariosUrl = `http://localhost:8080/cadastrar`
    }
 
   cadastrar(usuario: Usuario): Promise<Usuario> {
-    const headers = new HttpHeaders()
-      .append('Content-Type', 'application/json')
-      .append('Authorization', 'Basic YWRtaW5AZ21haWwuY29tOmFkbWlu');
-
-
-    return this.http.post<Usuario>(
-      `${this.usuariosUrl}`, usuario , {headers})
+       return this.http.post<Usuario>(
+      `${this.usuariosUrl}`, usuario)
       .toPromise();
 
   }

@@ -42,21 +42,19 @@
       <div class="ui-g-6 ui-fluid">
         <label>E-mail</label>
         <input pInputText type="text" placeholder="Informe o email" name="email"
-        [(ngModel)]="medico.email" #email="ngModel" required>
-
-        <app-message [control]="email" error="required" text="Informe o email"></app-message>
+        [(ngModel)]="medico.email" #email="ngModel">
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Telefone</label>
         <p-inputMask mask="(99)9999-9999" placeholder="Informe um telefone" name="telefone"
-        [(ngModel)]="medico.telefone" #telefone="ngModel" required></p-inputMask>
-
-        <app-message [control]="telefone" error="required" text="Informe um telefone"></app-message>
+        [(ngModel)]="medico.telefone" #telefone="ngModel" ></p-inputMask>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Celular</label>
         <p-inputMask mask="(99)99999-9999" placeholder="Informe um telefone" name="celular"
-        [(ngModel)]="medico.celular" required></p-inputMask>
+        [(ngModel)]="medico.celular"  #celular="ngModel" required></p-inputMask>
+
+        <app-message [control]="celular" error="required" text="Informe o número"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Status</label>
@@ -69,7 +67,7 @@
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
-        <a [routerLink]="['/medicos']">Voltar para pesquisa</a>
+        <button pButton type="button" label="Voltar para pesquisa" class="ui-button-success" style="margin: 5px;" [routerLink]="['/medicos']"></button>
       </div>
     </div>
 

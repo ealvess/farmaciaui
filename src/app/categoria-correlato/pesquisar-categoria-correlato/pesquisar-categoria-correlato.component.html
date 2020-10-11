@@ -59,7 +59,7 @@
     <div class="ui-g-12">
       <button pButton label="Nova Categoria" routerLink="/categoriascorrelato/novo"
        style="margin: 5px;" class="ui-button-success" [disabled]="!auth.temPermissao('ROLE_CADASTRAR_CATEGORIA_DE_CORRELATO')"></button>
-      <button pButton label="Voltar" routerLink="/entradacorrelatos" class="ui-button-success" [disabled]="!auth.temPermissao('ROLE_REMOVER_CATEGORIA_DE_CORRELATO')"></button>
+      <button pButton label="Voltar para entrada de medicamentos" routerLink="/entradacorrelatos" class="ui-button-success" [disabled]="!auth.temPermissao('ROLE_REMOVER_CATEGORIA_DE_CORRELATO')"></button>
     </div>
   </div>
 </div>

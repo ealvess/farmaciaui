@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PesquisarSaidaCentroDeCustoComponent } from './pesquisar-saida-centro-de-custo/pesquisar-saida-centro-de-custo.component';
 import { CadastrarSaidaCentroDeCustoComponent } from './cadastrar-saida-centro-de-custo/cadastrar-saida-centro-de-custo.component';
 import { SaidaDeMedicamentoCentroDeCustoRoutingModule } from './saida-de-medicamento-centro-de-custo-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,6 +24,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
 
     InputTextModule,
     ButtonModule,

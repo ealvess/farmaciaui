@@ -11,7 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
 import {TabMenuModule} from 'primeng/tabmenu';
-import {MenuItem} from 'primeng/api';
+import {SharedModule} from '../shared/shared.module';
 
 import { PesquisarEntradaDeMedicamentosComponent } from './pesquisar-entrada-de-medicamentos/pesquisar-entrada-de-medicamentos.component';
 import { EntradaDeMedicamentosRoutingModule } from './entrada-de-medicamentos-routing.module';
@@ -25,8 +25,8 @@ import { CadastrarEntradaDeMedicamentosComponent } from './cadastrar-entrada-de-
   ],
   imports: [
     CommonModule,
-
     FormsModule,
+    SharedModule,
 
     InputTextModule,
     ButtonModule,

@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { CadastrarTiposDeMedicamentosComponent } from './cadastrar-tipos-de-medicamentos/cadastrar-tipos-de-medicamentos.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -19,6 +20,7 @@ import { CadastrarTiposDeMedicamentosComponent } from './cadastrar-tipos-de-medi
   declarations: [PesquisarTiposDeMedicamentosComponent, CadastrarTiposDeMedicamentosComponent],
   imports: [
     CommonModule,
+    SharedModule,
 
     TiposDeMedicamentosRoutingModule,
 

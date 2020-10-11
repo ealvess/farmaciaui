@@ -10,17 +10,23 @@
         <label>Nome</label>
         <input pInputText type="text" placeholder="Informe o nome do medicamento" name="nome" 
          [(ngModel)]="medicamento.nome" #nome="ngModel" required>
+
+         <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Categoria</label>
         <p-dropdown [options]="categorias" [filter]="true" placeholder="Selecione" 
         name="categoria" [(ngModel)]="medicamento.categoria.codigo" #categoria="ngModel" required ></p-dropdown>
 
+        <app-message [control]="categoria" error="required" text="Selecione uma categoria"></app-message>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Apresentação</label>
         <p-dropdown [options]="apresentacao" [filter]="true"  placeholder="Selecione"
         name="unidadeDeMedida" [(ngModel)]="medicamento.unidadeDeMedida" #unidadeDeMedida="ngModel"></p-dropdown>
+
+        <app-message [control]="unidadeDeMedida" error="required" text="Selecione uma opção"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Quantidade Mínima</label>
@@ -29,13 +35,15 @@
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Localização</label>
-        <input pInputText type="text" placeholder="Informe o nome do medicamento" name="localizacao" 
+        <input pInputText type="text" placeholder="Informe a localização" name="localizacao" 
          [(ngModel)]="medicamento.localizacao" #localizacao="ngModel">
       </div>
       <div class="ui-g-12 ui-fluid">
         <label>Status</label>
         <p-dropdown [options]="status"  placeholder="Selecione" name="ativo"
         [(ngModel)]="medicamento.ativo" #ativo="ngModel" required></p-dropdown>
+
+        <app-message [control]="status" error="required" text="Selecione uma opção"></app-message>
       </div>
     </div>
 

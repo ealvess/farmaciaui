@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RelatoriosService } from '../relatorios.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-relatorio',
@@ -8,7 +9,10 @@ import { RelatoriosService } from '../relatorios.service';
 })
 export class RelatorioComponent implements OnInit {
 
-  constructor(private relatorioService: RelatoriosService) { }
+  constructor(
+    private relatorioService: RelatoriosService,
+    private title: Title
+    ) { }
 
   periodoInicioMed: Date;
   periodoFimMed: Date;
@@ -20,6 +24,7 @@ export class RelatorioComponent implements OnInit {
 
   ngOnInit(): void {
     this.localizacaoCalendar();
+    this.title.setTitle('Relatórios');
   }
 
   quantidadeEntradaDeMedicamentosMes() {

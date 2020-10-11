@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from 'src/environments/environment';
-
+import { Usuario } from '../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class AuthService {
   oauthTokenUrl: string;
   tokensRevokeUrl: string;
   jwtPayload: any;
-
+  usuariosUrl: string;
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService
@@ -21,10 +21,11 @@ export class AuthService {
     this.carregarToken();
     this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
     this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
+    this.usuariosUrl = `${environment.apiUrl}/cadastrar`
   }
 
   login(usuario: string, senha: string): Promise<void> {
-    
+
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/x-www-form-urlencoded')
       .append('Authorization', 'Basic YW5ndWxhcjokMmEkMTAkVXRTM0lhYnZuTlNUR3g3ZnpEb0pxTzRMZ1lFN0wuUm1nYzZTVll1TmpYWWNHUVJNd00wZmU=');
@@ -34,7 +35,7 @@ export class AuthService {
     return this.http.post<any>(this.oauthTokenUrl, body,
       { headers, withCredentials: true })
       .toPromise()
-      .then(response => {
+      .then(response => {        
         this.armazenarToken(response.access_token);
       })
       .catch(response => {
@@ -114,6 +115,12 @@ export class AuthService {
     if (token) {
       this.armazenarToken(token);
     }
+  }
+
+  cadastrar(usuario: Usuario): Promise<Usuario> {
+    return this.http.post<Usuario>(
+      `${this.usuariosUrl}`, usuario)
+      .toPromise();
   }
 
 }

@@ -10,11 +10,16 @@
         <label>Nome</label>
         <input pInputText type="text" placeholder="Informe o nome do centro de custo" 
         name="nome" [(ngModel)]="centroDeCusto.nome" #nome="ngModel" required>
+
+        <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
       </div>
       <div class="ui-g-12 ui-fluid">
         <label>Status</label>
         <p-dropdown [options]="status" placeholder="Selecione"
-        name="ativo" [(ngModel)]="centroDeCusto.ativo" #ativo="ngModel"></p-dropdown>
+        name="ativo" [(ngModel)]="centroDeCusto.ativo" #ativo="ngModel" required></p-dropdown>
+
+        <app-message [control]="ativo" error="required" text="Selecione uma opção"></app-message>
+
       </div>
     </div>
 

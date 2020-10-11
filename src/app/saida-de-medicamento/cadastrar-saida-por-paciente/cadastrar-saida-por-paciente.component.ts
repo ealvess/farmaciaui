@@ -13,6 +13,7 @@ import { SaidaDeMedicamentoService } from '../saida-de-medicamento.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PacienteService } from 'src/app/pacientes/paciente.service';
 import { EntradaDeMedicamentoService } from 'src/app/entrada-de-medicamentos/entrada-de-medicamento.service';
+import { MedicosService } from 'src/app/medicos/medicos.service';
 
 @Component({
   selector: 'app-cadastrar-saida-por-paciente',
@@ -24,6 +25,7 @@ export class CadastrarSaidaPorPacienteComponent implements OnInit {
   saidaPorPaciente = new SaidaDeMedicamento();
   pacientes = [];
   medicamentos = [];
+  medicos = [];
   pt: any;
   valorUnitario: number;
   total:number;
@@ -32,6 +34,7 @@ export class CadastrarSaidaPorPacienteComponent implements OnInit {
   constructor(
     private saidaService: SaidaDeMedicamentoService,
     private pacienteService: PacienteService,
+    private medicoService: MedicosService,
     private entradaMedicamentoService: EntradaDeMedicamentoService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
@@ -42,6 +45,7 @@ export class CadastrarSaidaPorPacienteComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Saida de Medicamento Por Paciente')
     this.carregarPacientes();
+    this.carregarMedicos();
     this.carregarMedicamentos();
     this.localizacaoCalendar();
   }
@@ -51,6 +55,16 @@ export class CadastrarSaidaPorPacienteComponent implements OnInit {
       .then(pacientes => {
         this.pacientes = pacientes.map(cat =>  
           ({ label: cat.nome, value: cat.codigo }));
+          
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarMedicos() { 
+    return this.medicoService.listarTodos()
+      .then(medicos => {
+        this.medicos = medicos.map(med =>  
+          ({ label: med.nome, value: med.codigo }));
           
       })
       .catch(erro => this.errorHandler.handle(erro));

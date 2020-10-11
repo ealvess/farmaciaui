@@ -10,46 +10,66 @@
         <label>Data Entrada</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="dataEntrada" [(ngModel)]="entradaCorrelato.dataEntrada" #dataEntrada="ngModel" required></p-calendar>
+
+        <app-message [control]="dataEntrada" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Nome do Fornecedor</label>
         <p-dropdown [options]="fornecedores" [filter]="true" placeholder="Selecione" 
         name="fornecedor" [(ngModel)]="entradaCorrelato.fornecedor.codigo" #fornecedor="ngModel" required></p-dropdown>
+
+        <app-message [control]="fornecedor" error="required" text="Selecione um fornecedor"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Nota Fiscal</label>
         <input pInputText type="text" placeholder="Informe o número da nota fiscal" name="numeroNotaFiscal"
         [(ngModel)]="entradaCorrelato.numeroNotaFiscal" #numeroNotaFiscal="ngModel" required>
+
+        <app-message [control]="numeroNotaFiscal" error="required" text="Informe o número da nota fiscal"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Nome do Correlato</label>
         <p-dropdown [options]="correlatos" [filter]="true" placeholder="Selecione" 
         name="correlato" [(ngModel)]="entradaCorrelato.correlato.codigo" #correlato="ngModel" required></p-dropdown>
+
+        <app-message [control]="correlato" error="required" text="Selecione uma opção"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Data de Fabricação</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="dataFabricacao" [(ngModel)]="entradaCorrelato.dataFabricacao" #dataFabricacao="ngModel" required></p-calendar>
+
+        <app-message [control]="dataFabricacao" error="required" text="Selecione uma data"></app-message>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Data de Validade</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="validade" [(ngModel)]="entradaCorrelato.dataValidade" #validade="ngModel" required></p-calendar>
+
+        <app-message [control]="validade" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-4 ui-fluid">
         <label>Lote</label>
         <input pInputText type="text" placeholder="Informe o lote" name="lote"
         [(ngModel)]="entradaCorrelato.lote" #lote="ngModel" required>
+
+        <app-message [control]="lote" error="required" text="Informe o lote"></app-message>
       </div>
       <div class="ui-g-4 ui-fluid">
         <label>Quantidade</label>
         <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade"
         [(ngModel)]="entradaCorrelato.quantidade" #quantidade="ngModel" required>
+
+        <app-message [control]="quantidade" error="required" text="Informe a quantidade"></app-message>
       </div>
       <div class="ui-g-4 ui-fluid">
         <label>Valor Unitário</label>
         <input pInputText type="text" placeholder="0,0" name="valorUnitario"
         [(ngModel)]="entradaCorrelato.valorUnitario" #valorUnitario="ngModel" required>
+
+        <app-message [control]="valorUnitario" error="required" text="Informeo valor unitário"></app-message>
+
       </div>
      
 
@@ -58,7 +78,7 @@
         <button pButton type="button" label="Novo" class="ui-button-success" 
         [routerLink]="['/entradacorrelatos/novo']" style="margin: 5px;"></button>
         <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
-        <a [routerLink]="['/entradacorrelatos']">Voltar para pesquisa</a>
+        <button pButton label="Voltar para pesquisa" class="ui-button-success"  [routerLink]="['/entradacorrelatos']" style="margin: 5px;"></button>
       </div>
     </div>
 

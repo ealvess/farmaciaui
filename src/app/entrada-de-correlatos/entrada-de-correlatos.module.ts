@@ -15,7 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import {TabMenuModule} from 'primeng/tabmenu';
-import {MenuItem} from 'primeng/api';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -25,6 +25,7 @@ import {MenuItem} from 'primeng/api';
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
 
     InputTextModule,
     ButtonModule,

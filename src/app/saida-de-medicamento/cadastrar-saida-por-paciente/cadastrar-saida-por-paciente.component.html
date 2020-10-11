@@ -7,27 +7,41 @@
       </div>
 
       <div class="ui-g-6 ui-fluid">
+        <label>Medico</label>
+        <p-dropdown [options]="medicos" [filter]="true" placeholder="Selecione" 
+        name="medico" [(ngModel)]="saidaPorPaciente.medico.codigo" #medico="ngModel" required ></p-dropdown>
+
+        <app-message [control]="medico" error="required" text="Selecione o médico"></app-message>
+      </div>
+
+      <div class="ui-g-6 ui-fluid">
         <label>Paciente</label>
         <p-dropdown [options]="pacientes" [filter]="true" placeholder="Selecione" 
         name="paciente" [(ngModel)]="saidaPorPaciente.paciente.codigo" #paciente="ngModel" required ></p-dropdown>
 
+        <app-message [control]="paciente" error="required" text="Selecione o paciente"></app-message>
       </div>
-      <div class="ui-g-6 ui-fluid">
+      <div class="ui-g-12 ui-fluid">
         <label>Medicamento</label>
         <p-dropdown [options]="medicamentos" [filter]="true" placeholder="Selecione" 
         name="entradaMedicamento" [(ngModel)]="saidaPorPaciente.entradaMedicamento.codigo" #entradaMedicamento="ngModel" 
-        (click)="pegarValores(saidaPorPaciente.entradaMedicamento.codigo)" required ></p-dropdown>
+        (click)="pegarValores(saidaPorPaciente.entradaMedicamento.codigo)" #entradaMedicamento="ngModel" required ></p-dropdown>
 
+        <app-message [control]="entradaMedicamento" error="required" text="Selecione o medicamento"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Data Saida</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="dataSaida" [(ngModel)]="saidaPorPaciente.dataSaida" #dataSaida="ngModel" required></p-calendar>
+
+        <app-message [control]="dataSaida" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Quantidade</label>
         <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade" 
         [(ngModel)]="saidaPorPaciente.quantidade" #quantidade="ngModel">
+
+        <app-message [control]="quantidade" error="required" text="Informe a quantidade"></app-message>
       </div>
       
       

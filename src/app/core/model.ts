@@ -122,6 +122,7 @@ export class Paciente{
 export class SaidaDeMedicamento{
 	codigo: number;
 	paciente = new Paciente();
+	medico = new Medico();
 	entradaMedicamento = new EntradaMedicamento();
 	dataSaida: Date;
 	quantidade: number;

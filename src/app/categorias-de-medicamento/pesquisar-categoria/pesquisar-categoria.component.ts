@@ -35,7 +35,7 @@ export class PesquisarCategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.pesquisar();
-    this.title.setTitle('Pesquisa de categorias');
+    this.title.setTitle('Pesquisa de categorias de medicamento');
   }
 
   pesquisar(pagina = 0) {

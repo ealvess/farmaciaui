@@ -31,7 +31,7 @@ export class PesquisarTiposDeMedicamentosComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Pesquisa de medicamentos');
+    this.title.setTitle('Pesquisa de tipos de medicamentos');
 
     this.pesquisar();
   }

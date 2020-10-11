@@ -43,7 +43,7 @@ export class CadastrarCategoriasComponent implements OnInit {
       this.carregarCategoria(this.codigoCategoria);
     }
 
-    this.title.setTitle('Nova Categoria')
+    this.title.setTitle('Nova Categoria de Medicamento')
   }
 
   get editando() {

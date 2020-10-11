@@ -10,46 +10,64 @@
         <label>Data Entrada</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="dataEntrada" [(ngModel)]="entradaMedicamento.dataEntrada" #dataEntrada="ngModel" required></p-calendar>
+
+        <app-message [control]="dataEntrada" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Nome do Fornecedor</label>
         <p-dropdown [options]="fornecedores" [filter]="true" placeholder="Selecione" 
         name="fornecedor" [(ngModel)]="entradaMedicamento.fornecedor.codigo" #fornecedor="ngModel" required></p-dropdown>
+
+        <app-message [control]="fornecedor" error="required" text="Selecione um fornecedor"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Nota Fiscal</label>
         <input pInputText type="text" placeholder="Informe o número da nota fiscal" name="numeroNotaFiscal"
         [(ngModel)]="entradaMedicamento.numeroNotaFiscal" #numeroNotaFiscal="ngModel" required>
+
+        <app-message [control]="numeroNotaFiscal" error="required" text="Informe o número da nota fiscal"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Nome do Medicamento</label>
         <p-dropdown [options]="medicamentos" [filter]="true" placeholder="Selecione" 
         name="medicamento" [(ngModel)]="entradaMedicamento.medicamento.codigo" #medicamento="ngModel" required></p-dropdown>
+
+        <app-message [control]="medicamento" error="required" text="Selecione um medicamento"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Data de Fabricação</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="dataFabricacao" [(ngModel)]="entradaMedicamento.dataFabricacao" #dataFabricacao="ngModel" required></p-calendar>
+
+        <app-message [control]="dataFabricacao" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Data de Validade</label>
         <p-calendar dateFormat="dd.mm.yy" [locale]="pt" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:3000" placeholder="Informe uma data"
         name="validade" [(ngModel)]="entradaMedicamento.validade" #validade="ngModel" required></p-calendar>
+
+        <app-message [control]="validade" error="required" text="Selecione uma data"></app-message>
       </div>
       <div class="ui-g-4 ui-fluid">
         <label>Lote</label>
         <input pInputText type="text" placeholder="Informe o lote" name="lote"
         [(ngModel)]="entradaMedicamento.lote" #lote="ngModel" required>
+
+        <app-message [control]="lote" error="required" text="Informe o lote"></app-message>
       </div>
       <div class="ui-g-4 ui-fluid">
         <label>Quantidade</label>
         <input pInputText type="text" placeholder="Informe a quantidade" name="quantidade"
         [(ngModel)]="entradaMedicamento.quantidade" #quantidade="ngModel" required>
+
+        <app-message [control]="quantidade" error="required" text="Informe a quantidade"></app-message>
       </div>
       <div class="ui-g-4 ui-fluid">
         <label>Valor Unitário</label>
         <input pInputText type="text" placeholder="0,0" name="valorUnitario"
         [(ngModel)]="entradaMedicamento.valorUnitario" #valorUnitario="ngModel" required>
+
+        <app-message [control]="valorUnitario" error="required" text="Informe o vaalor unitário"></app-message>
       </div>
     
       
@@ -60,8 +78,7 @@
       <button pButton type="button" label="Novo" class="ui-button-success" 
       (click)="novo(f)" style="margin: 5px;"></button>
       <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
-      <a [routerLink]="['/entradamedicamentos']" style="margin: 5px;">Voltar para pesquisa</a>
-
+      <button pButton label="Voltar para pesquisa" class="ui-button-success" [routerLink]="['/entradamedicamentos']" style="margin: 5px;"></button>
     </div>
   </form>
 </div>

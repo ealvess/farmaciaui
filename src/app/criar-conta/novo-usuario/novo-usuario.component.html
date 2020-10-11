@@ -8,33 +8,40 @@
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text" placeholder="Informe o nome de usuario" name="nome" 
-         [(ngModel)]="usuario.nome" #nome="ngModel" required>
+        <input pInputText type="text" placeholder="Informe o nome do usuario" name="nome" [(ngModel)]="usuario.nome"
+          #nome="ngModel" required>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Email</label>
-        <input pInputText type="email" placeholder="Informe o email" name="email" 
-         [(ngModel)]="usuario.email" #email="ngModel" required>
+        <input pInputText type="email" placeholder="Informe o email" name="email" [(ngModel)]="usuario.email"
+          #email="ngModel" required>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Senha</label>
-        <input pInputText type="password" placeholder="Informe a senha" name="senha" 
-         [(ngModel)]="usuario.senha" #senha="ngModel" required>
+        <input pInputText type="password" placeholder="Informe a senha" name="senha" [(ngModel)]="usuario.senha"
+          #senha="ngModel" required>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Cargo</label>
-        <p-dropdown [options]="tipoUsuario" [filter]="true"  placeholder="Selecione"
-        name="tipo" [(ngModel)]="usuario.tipo" #tipo="ngModel"></p-dropdown>
+        <p-dropdown [options]="tipoUsuario" [filter]="true" placeholder="Selecione" name="tipo"
+          [(ngModel)]="usuario.tipo" #tipo="ngModel" required></p-dropdown>
+
       </div>
       <div class="ui-g-6 ui-fluid">
         <label>Status</label>
-        <p-dropdown [options]="status"  placeholder="Selecione" name="ativo"
-        [(ngModel)]="usuario.ativo" #ativo="ngModel"></p-dropdown>
+        <p-dropdown [options]="status" placeholder="Selecione" name="ativo" [(ngModel)]="usuario.ativo" #ativo="ngModel"
+          required></p-dropdown>
+
       </div>
     </div>
 
     <div class="ui-g-12">
       <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+      <button pButton type="button" label="Voltar para o login" class="ui-button-success" style="margin: 5px;"
+        routerLink="/login" (click)="logout()"></button>
     </div>
   </form>
 </div>

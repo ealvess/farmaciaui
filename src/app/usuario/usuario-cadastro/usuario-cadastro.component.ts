@@ -84,8 +84,7 @@ export class UsuarioCadastroComponent implements OnInit {
     return this.usuarioService.listarPermissoes()
       .then(medicamentos => {
         this.permissoes = medicamentos.map(med =>  
-          ({ codigo: med.codigo })); 
-          console.log('permissoes', this.permissoes);         
+          ({ codigo: med.codigo }));        
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -95,9 +94,7 @@ export class UsuarioCadastroComponent implements OnInit {
       this.usuario.permissoes = this.permissoes;
     }
    
-    if(this.usuario.tipo === 'atendente'){
-      console.log('ate', this.atendente);
-      
+    if(this.usuario.tipo === 'atendente'){      
       this.usuario.permissoes = [
         {codigo:3},{codigo:6},{codigo:9},{codigo:12},{codigo:15},{codigo:16},{codigo:17},
         {codigo:18},{codigo:19},{codigo:22},{codigo:25},{codigo:28},{codigo:31},{codigo:34}
@@ -108,8 +105,6 @@ export class UsuarioCadastroComponent implements OnInit {
 
   adicionarUsuario(form: FormControl) {
     this.verificarTipoUsuario(form);
-    console.log('permissoes', this.usuario.permissoes);
-    console.log('usuer',this.usuario);
     this.usuarioService.salvar(this.usuario)
     
       .then(() => {

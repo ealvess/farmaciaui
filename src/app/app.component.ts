@@ -12,6 +12,9 @@ export class AppComponent {
   }
 
   exibindoNavbar() {
-    return this.router.url !== '/login';
+    
+    return this.router.url !== '/login' && this.router.url !== '/cadastrar';
   }
+
+ 
 }

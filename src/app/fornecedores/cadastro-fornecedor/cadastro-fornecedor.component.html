@@ -118,7 +118,7 @@
       <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
       <button pButton type="button" label="Novo" class="ui-button-success" style="margin: 5px;" (click)="novo(f)"></button>
       <button pButton (click)="generatePDF(f)" label="Gerar PDF" class="ui-button-success gerarPdf"></button>
-      <a [routerLink]="['/fornecedores']">Voltar para pesquisa</a>
+      <button pButton label="Voltar para pesquisa" class="ui-button-success" [routerLink]="['/fornecedores']" style="margin: 5px;"></button>
     </div>
   </form>
 </div>

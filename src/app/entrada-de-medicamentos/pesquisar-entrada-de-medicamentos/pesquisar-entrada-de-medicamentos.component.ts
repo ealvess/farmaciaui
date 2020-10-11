@@ -31,7 +31,7 @@ export class PesquisarEntradaDeMedicamentosComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Estoque de Medicamentos');
+    this.title.setTitle('Entrada de Medicamentos');
     this.localizacaoCalendar();
 
     this.items = [
