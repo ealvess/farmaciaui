@@ -137,7 +137,7 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   atualizarTituloEdicao() {
-    this.title.setTitle(`Edição de Usuario: ${this.usuario.nome}`);
+    this.title.setTitle(`Edição de Usuário: ${this.usuario.nome}`);
   }
 
   generatePDF(form: FormControl) {

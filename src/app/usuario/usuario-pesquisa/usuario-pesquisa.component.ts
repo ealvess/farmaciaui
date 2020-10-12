@@ -30,7 +30,7 @@ export class UsuarioPesquisaComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Pesquisa de usuarios');
+    this.title.setTitle('Pesquisa de usuários');
 
     this.pesquisar();
   }

@@ -11,7 +11,7 @@
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario">{{ auth.jwtPayload?.nome }}</li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')"><a routerLink="/usuario">Usuarios</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')"><a routerLink="/usuario">Usuários</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
     *ngIf="auth.temPermissao('ROLE_PESQUISAR_MEDICO')"><a routerLink="/medicos">Médicos</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
@@ -25,9 +25,9 @@
     <li class="navbar-menuitem" routerLinkActive="ativo"
     *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_CORRELATO')"><a routerLink="/entradacorrelatos">Correlatos</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/dashboard">Estatisticas</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/dashboard">Estatísticas</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/relatorios">Relatorios</a></li>
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO')"><a routerLink="/relatorios">Relatórios</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"><a href="javascript:;" (click)="logout()">Sair</a></li>
   </ul>
 </nav>
