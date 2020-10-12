@@ -10,7 +10,7 @@ const routes: Routes = [
     component: RelatorioComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_PESQUISAR_ENTRADA_DE_MEDICAMENTO'] }
-  },
+  }, 
 ];
 
 @NgModule({
