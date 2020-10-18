@@ -43,7 +43,7 @@
         <p-dropdown [options]="status"  placeholder="Selecione" name="ativo"
         [(ngModel)]="medicamento.ativo" #ativo="ngModel" required></p-dropdown>
 
-        <app-message [control]="status" error="required" text="Selecione uma opção"></app-message>
+        <app-message [control]="ativo" error="required" text="Selecione uma opção"></app-message>
       </div>
     </div>
 

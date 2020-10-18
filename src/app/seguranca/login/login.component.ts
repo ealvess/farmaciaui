@@ -37,8 +37,8 @@ export class LoginComponent{
   //usado apenas para apresentação do TCC, retirar depois,
   //visto que não haverá auto-cadastro, sendo estq criado apenas para
   //atender aos requisitos obrigatórios
-  user = 'useradd@gmail.com';
-  senha = 'useradd';
+  user = 'admin@gmail.com';
+  senha = 'admin';
 
   chamarLogin(){
     this.auth.login(this.user, this.senha);

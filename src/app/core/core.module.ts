@@ -35,9 +35,8 @@ import { AuthService } from '../seguranca/auth.service';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RelatoriosService } from '../relatorios/relatorios.service'
-import { NovoUsuarioService } from '../criar-conta/novo-usuario.service';
-// E por fim, registre o localePt como 'pt-BR'
 
+// E por fim, registre o localePt como 'pt-BR'
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
@@ -75,7 +74,6 @@ registerLocaleData(localePt, 'pt-BR');
     DashboardService,
     UsuarioService,
     RelatoriosService,
-    NovoUsuarioService,
     Title,
     {
       provide: LOCALE_ID, useValue: 'pt-BR'

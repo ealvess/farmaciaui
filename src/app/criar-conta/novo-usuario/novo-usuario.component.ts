@@ -6,7 +6,6 @@ import { MessageService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NovoUsuarioService } from '../novo-usuario.service';
 import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
@@ -33,7 +32,6 @@ export class NovoUsuarioComponent implements OnInit {
   atendente: [];
 
   constructor(
-    private novoUsuarioService: NovoUsuarioService,
     private authService: AuthService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
